@@ -2,6 +2,14 @@ import { Flex, Image, Box } from '@chakra-ui/react'
 import React from 'react'
 
 const Home = () => {
+  const handleSaveClick = () => {
+    alert('이미지가 저장되었습니다.')
+  }
+
+  const handleShareClick = () => {
+    alert('이미지가 공유되었습니다.')
+  }
+
   return (
     <Box p={4}>
       <Image 
@@ -23,6 +31,7 @@ const Home = () => {
           w="45%"
           h="auto"
           cursor="pointer"
+          onClick={handleSaveClick}
         />
         <Image 
           src="/image/Final_UI_share.svg" 
@@ -30,6 +39,7 @@ const Home = () => {
           w="45%"
           h="auto" 
           cursor="pointer"
+          onClick={handleShareClick}
         />
       </Flex>
     </Box>
