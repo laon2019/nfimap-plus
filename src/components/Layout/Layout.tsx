@@ -9,7 +9,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <Box 
-      height="100vh" 
+      height="100%" 
       display="flex" 
       justifyContent="center" 
       backgroundColor="gray.100"
