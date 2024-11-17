@@ -1,11 +1,16 @@
 import React from 'react';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <div className="App">
-      엔피맵 플러스페이지
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Layout>
   );
 }
 
