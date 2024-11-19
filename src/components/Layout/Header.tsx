@@ -8,7 +8,6 @@ const Header = () => {
     <Box
       p="10px"
       bg="white"
-      borderBottom="1px solid black"
       height="68px"
       display="flex"
       alignItems="center"
