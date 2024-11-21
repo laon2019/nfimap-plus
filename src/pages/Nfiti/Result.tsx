@@ -1,23 +1,23 @@
-import { Flex, Image, Box, Input, Button, Spinner } from '@chakra-ui/react'
+import { Flex, Image, Box, Input, Button, Spinner, Text } from '@chakra-ui/react'
 import React, { useState, useRef, useEffect } from 'react'
 
-const Result = () => {
-  const [text, setText] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+interface ResultProps {
+  name: string;
+  answer: {[key: number]: boolean};
+  handleRestartTest: () => void;
+}
+
+const Result = ({ name, answer, handleRestartTest }: ResultProps) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [imageLoaded, setImageLoaded] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value)
-  }
-
-  const handleGenerateClick = () => {
-    setIsLoading(true)
+  useEffect(() => {
     setTimeout(() => {
       setIsLoading(false)
       setImageLoaded(true)
     }, 2000)
-  }
+  }, [])
 
   useEffect(() => {
     if (imageLoaded && canvasRef.current) {
@@ -34,13 +34,13 @@ const Result = () => {
           ctx.font = 'bold 100px Arial'
           ctx.fillStyle = 'black'
           ctx.textAlign = 'center'
-          ctx.fillText(text, canvas.width/2, canvas.height/9)
+          ctx.fillText(name, canvas.width/2, canvas.height/9)
         }
       }
       
       img.src = '/image/NFITI.png'
     }
-  }, [imageLoaded, text])
+  }, [imageLoaded, name])
 
   const handleSaveClick = () => {
     if (canvasRef.current) {
@@ -66,18 +66,6 @@ const Result = () => {
   return (
     <Box p={4}>
       <Flex direction="column" gap={4}>
-        <Input
-          placeholder="텍스트를 입력하세요"
-          value={text}
-          onChange={handleTextChange}
-        />
-        <Button
-          onClick={handleGenerateClick}
-          isDisabled={!text}
-        >
-          이미지 생성하기
-        </Button>
-
         {isLoading ? (
           <Flex justify="center" p={8}>
             <Spinner size="xl" />
@@ -115,6 +103,8 @@ const Result = () => {
             />
           </Flex>
         )}
+        <Text color="blue.500">{JSON.stringify(answer)}</Text>
+        <Button onClick={handleRestartTest}>다시하기</Button>
       </Flex>
     </Box>
   )

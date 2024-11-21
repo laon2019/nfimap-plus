@@ -13,7 +13,7 @@ interface ProcessProps {
   onComplete?: (answers: {[key: number]: boolean}) => void;
 }
 
-const Process = ({ questions, onComplete }: ProcessProps) => {
+const Process = ({ questions , onComplete }: ProcessProps) => {
   const [currentAnswers, setCurrentAnswers] = useState<{[key: number]: boolean}>({})
 
   const handleAnswer = (questionId: number, answer: boolean) => {

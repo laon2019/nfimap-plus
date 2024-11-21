@@ -3,14 +3,14 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
-import Nfiti from './pages/Nfiti';
+import NfititTestFlow from './pages/Nfiti/NfitiTestFlow';
 
 function App() {
   return (
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Nfiti" element={<Nfiti />} />
+        <Route path="/Nfiti" element={<NfititTestFlow />} />
       </Routes>
     </Layout>
   );

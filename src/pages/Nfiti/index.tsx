@@ -1,7 +1,11 @@
 import React from 'react'
 import { Box, Button, Image } from '@chakra-ui/react'
 
-const Nfiti = () => {
+interface NfitiProps {
+  onStartTest: () => void;
+}
+
+const Nfiti = ({onStartTest}: NfitiProps) => {
   return (
     <Box position="relative">
       <Image
@@ -23,6 +27,7 @@ const Nfiti = () => {
           colorScheme="blue"
           size="lg"
           borderRadius="full"
+          onClick={onStartTest}
         >
           테스트 시작하기
         </Button>
