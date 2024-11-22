@@ -1,15 +1,24 @@
-import React, { useState } from "react";
-import { Box, Text, VStack, Container, Button, Image, HStack, Input } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { Box } from "@chakra-ui/react";
 import Nfiti from ".";
 import Result from "./Result";
+import NameInput from "./components/NameInput";
+import Process from "../../components/Process";
 import { QUESTIONS, RESULT_DESCRIPTIONS, TestResult } from "./constants";
+import { useSetRecoilState } from "recoil";
+import { bgColorState } from "../../Atom/bgColorState";
 
 const NfititTestFlow = () => {
   const [testStage, setTestStage] = useState<"intro" | "nameInput" | "process" | "result">("intro");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<{[key: number]: boolean}>({});
-const [testResult, setTestResult] = useState<TestResult | null>(null);
-const [name, setName] = useState("");
+  const [answers, setAnswers] = useState<{ [key: number]: boolean }>({});
+  const [testResult, setTestResult] = useState<TestResult | null>(null);
+  const [name, setName] = useState("");
+  const setBgColor = useSetRecoilState(bgColorState);
+
+  useEffect(() => {
+    setBgColor("blue.100");
+  }, []);
 
   const handleStartTest = () => {
     setTestStage("nameInput");
@@ -17,31 +26,33 @@ const [name, setName] = useState("");
 
   const handleAnswer = (answer: boolean) => {
     const currentQuestion = QUESTIONS[currentQuestionIndex];
-    setAnswers(prev => ({
+    setAnswers((prev) => ({
       ...prev,
-      [currentQuestion.id]: answer
+      [currentQuestion.id]: answer,
     }));
 
     if (currentQuestionIndex < QUESTIONS.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
+      setCurrentQuestionIndex((prev) => prev + 1);
     } else {
       calculateResult();
     }
   };
 
   const calculateResult = () => {
-    const positiveAnswers = Object.values(answers).filter((answer) => answer).length;
+    const group1 = [1, 2, 3];
+    const group2 = [4, 5, 6];
+    const group3 = [7, 8, 9]; 
 
-    let result: TestResult;
-    if (positiveAnswers <= 1) {
-      result = RESULT_DESCRIPTIONS.introvert;
-    } else if (positiveAnswers <= 3) {
-      result = RESULT_DESCRIPTIONS.balanced;
-    } else {
-      result = RESULT_DESCRIPTIONS.extrovert;
-    }
+    const countTrueInGroup = (group: number[]) =>
+      group.reduce((acc, id) => acc + (answers[id] ? 1 : 0), 0);
 
-    setTestResult(result);
+    const eOrI = countTrueInGroup(group1) > group1.length / 2 ? "E" : "I";
+    const sOrN = countTrueInGroup(group2) > group2.length / 2 ? "S" : "N";
+    const fOrT = countTrueInGroup(group3) > group3.length / 2 ? "F" : "T";
+
+    const resultCode = `${eOrI}${sOrN}${fOrT}` as keyof typeof RESULT_DESCRIPTIONS;
+
+    setTestResult(RESULT_DESCRIPTIONS[resultCode]);
     setTestStage("result");
   };
 
@@ -49,11 +60,11 @@ const [name, setName] = useState("");
     setTestStage("intro");
     setTestResult(null);
     setCurrentQuestionIndex(0);
-      setAnswers({});
-      setName("");
-    };
-    
-     const handleNameSubmit = () => {
+    setAnswers({});
+    setName("");
+  };
+
+  const handleNameSubmit = () => {
     if (name.trim()) {
       setTestStage("process");
     } else {
@@ -64,64 +75,19 @@ const [name, setName] = useState("");
   const renderContent = () => {
     switch (testStage) {
       case "intro":
-            return <Nfiti onStartTest={handleStartTest} />;
-        case "nameInput":
-            return (
-            <VStack spacing={4}>
-                <Text fontSize="lg">이름을 입력해주세요:</Text>
-                <Input
-                placeholder="이름을 입력하세요"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                />
-                <Button colorScheme="blue" onClick={handleNameSubmit}>
-                다음
-                </Button>
-            </VStack>
-            );
+        return <Nfiti onStartTest={handleStartTest} />;
+      case "nameInput":
+        return <NameInput name={name} setName={setName} onSubmit={handleNameSubmit} />;
       case "process":
-        const currentQuestion = QUESTIONS[currentQuestionIndex];
         return (
-          <Box p={4}>
-            <VStack spacing={6} align="stretch">
-              <Box p={4} borderWidth={1} borderRadius="lg">
-                <VStack spacing={4}>
-                  <Image 
-                    src={currentQuestion.image}
-                    alt={`질문 ${currentQuestion.id} 이미지`}
-                    width="100%"
-                    height="200px"
-                    objectFit="cover"
-                    borderRadius="md"
-                  />
-                  <Text fontSize="lg">{currentQuestion.text}</Text>
-                  <HStack spacing={4} justifyContent="center">
-                    <Button 
-                      colorScheme="green"
-                      onClick={() => handleAnswer(true)}
-                    >
-                      예
-                    </Button>
-                    <Button
-                      colorScheme="red"
-                      onClick={() => handleAnswer(false)}
-                    >
-                      아니오
-                    </Button>
-                  </HStack>
-                </VStack>
-              </Box>
-            </VStack>
-          </Box>
-        );
-      case "result":
-        return (
-            <Result
-                name={name}
-            answer={answers} 
-            handleRestartTest={handleRestartTest} 
+          <Process
+            currentQuestionIndex={currentQuestionIndex}
+            handleAnswer={handleAnswer}
+            questions={QUESTIONS}
           />
         );
+      case "result":
+        return <Result name={name} answer={answers} handleRestartTest={handleRestartTest} />;
     }
   };
 
