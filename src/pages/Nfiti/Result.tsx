@@ -3,11 +3,11 @@ import React, { useState, useRef, useEffect } from 'react'
 
 interface ResultProps {
   name: string;
-  answer: {[key: number]: boolean};
+  testResult: any;
   handleRestartTest: () => void;
 }
 
-const Result = ({ name, answer, handleRestartTest }: ResultProps) => {
+const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
   const [isLoading, setIsLoading] = useState(true)
   const [imageLoaded, setImageLoaded] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -64,7 +64,7 @@ const Result = ({ name, answer, handleRestartTest }: ResultProps) => {
   }
 
   return (
-    <Box p={4}>
+    <Box p={1}>
       <Flex direction="column" gap={4}>
         {isLoading ? (
           <Flex justify="center" p={8}>
@@ -103,7 +103,7 @@ const Result = ({ name, answer, handleRestartTest }: ResultProps) => {
             />
           </Flex>
         )}
-        <Text color="blue.500">{JSON.stringify(answer)}</Text>
+        <Text color="blue.500">{JSON.stringify(testResult)}</Text>
         <Button onClick={handleRestartTest}>다시하기</Button>
       </Flex>
     </Box>

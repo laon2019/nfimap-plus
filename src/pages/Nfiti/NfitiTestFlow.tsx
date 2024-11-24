@@ -87,7 +87,7 @@ const NfititTestFlow = () => {
           />
         );
       case "result":
-        return <Result name={name} answer={answers} handleRestartTest={handleRestartTest} />;
+        return <Result name={name} testResult={testResult} handleRestartTest={handleRestartTest} />;
     }
   };
 
