@@ -8,13 +8,27 @@ interface NameInputProps {
 }
 
 const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      onSubmit();
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length <= 2) {
+      setName(e.target.value);
+    }
+  };
+
   return (
     <VStack spacing={4}>
-      <Text fontSize="lg">이름을 입력해주세요:</Text>
+      <Text fontSize="lg">이름을 입력해주세요 (최대 2글자):</Text>
       <Input
         placeholder="이름을 입력하세요"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
+        maxLength={2}
       />
       <Button colorScheme="blue" onClick={onSubmit}>
         다음

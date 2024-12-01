@@ -15,10 +15,34 @@ interface ProcessProps {
 
 const Process: React.FC<ProcessProps> = ({ currentQuestionIndex, handleAnswer, questions }) => {
   const currentQuestion = questions[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
     <Box p={4}>
       <VStack spacing={6} align="stretch">
+        <Box position="relative" h="20px" bg="gray.100" borderRadius="full">
+          <Box
+            position="absolute"
+            left="0"
+            top="0"
+            h="100%"
+            w={`${progress}%`}
+            bg="blue.500"
+            borderRadius="full"
+            transition="width 0.3s ease-in-out"
+          >
+            <Image
+              src="/image/nfiti/loading/loading-gif.gif"
+              alt="로딩 이미지"
+              position="absolute"
+              top="30%"
+              right="-30px"
+              transform="translateY(-50%)"
+              width="50px"
+              height="50px"
+            />
+          </Box>
+        </Box>
         <Box p={4} borderWidth={1} borderRadius="lg">
           <VStack spacing={4}>
             <Image
