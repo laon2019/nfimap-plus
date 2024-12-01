@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { Box, Container } from "@chakra-ui/react";
 import Header from "./Header";
+import { bgColorState } from "../../Atom/bgColorState";
+import { useRecoilValue } from "recoil";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const bg = useRecoilValue(bgColorState);
   return (
     <Box 
       height="100%" 
       display="flex" 
       justifyContent="center" 
-      backgroundColor="gray.100"
+      backgroundColor={bg}
     >
       <Container 
         maxW="480px"
@@ -22,7 +25,7 @@ const Layout = ({ children }: LayoutProps) => {
         boxShadow="lg"
       >
         <Header />
-        <main>{children}</main>
+        <main style={{ minHeight: "calc(100vh - 68px)"}}>{children}</main>
       </Container>
     </Box>
   );
