@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 import Nfiti from ".";
 import Result from "./Result";
 import NameInput from "./components/NameInput";
-import Process from "../../components/Process";
+import Process from "./components/Process";
 import { QUESTIONS, RESULT_DESCRIPTIONS, TestResult } from "./constants";
 import { useSetRecoilState } from "recoil";
 import { bgColorState } from "../../Atom/bgColorState";

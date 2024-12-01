@@ -49,7 +49,7 @@ const Process: React.FC<ProcessProps> = ({ currentQuestionIndex, handleAnswer, q
               src={currentQuestion.image}
               alt={`질문 ${currentQuestion.id} 이미지`}
               width="100%"
-              height="200px"
+              height="600px"
               objectFit="cover"
               borderRadius="md"
             />
