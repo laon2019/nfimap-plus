@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import NfititTestFlow from './pages/Nfiti/NfitiTestFlow';
 import NotFoundPage from './pages/NotFound';
 
-function App() {
+const App = () => {
   return (
     <Layout>
       <Routes>
