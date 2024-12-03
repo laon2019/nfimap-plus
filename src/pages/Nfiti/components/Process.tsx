@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, VStack, Text, HStack, Button } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 interface Question {
   id: number;
@@ -13,7 +14,7 @@ interface ProcessProps {
   questions: Question[];
 }
 
-const Process: React.FC<ProcessProps> = ({ currentQuestionIndex, handleAnswer, questions }) => {
+const Process = ({ currentQuestionIndex, handleAnswer, questions }:ProcessProps) => {
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
@@ -27,7 +28,7 @@ const Process: React.FC<ProcessProps> = ({ currentQuestionIndex, handleAnswer, q
             top="0"
             h="100%"
             w={`${progress}%`}
-            bg="blue.500"
+            bg="purple.400"
             borderRadius="full"
             transition="width 0.3s ease-in-out"
           >
@@ -36,41 +37,114 @@ const Process: React.FC<ProcessProps> = ({ currentQuestionIndex, handleAnswer, q
               src="/image/nfiti/loading/loading-gif.gif"
               alt="로딩 이미지"
               position="absolute"
-              top="30%"
+              top="10%"
               right="-30px"
               transform="translateY(-50%)"
-              width="50px"
-              height="50px"
+              width="80px"
+              height="80px"
             />
           </Box>
         </Box>
         <Box 
-          p={4} 
-          borderWidth={1} 
-          borderRadius="lg"
           flex="1"
-          backgroundImage={`url(${currentQuestion.image})`}
-          backgroundSize="cover"
-          backgroundPosition="center"
-          position="relative"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          maxHeight="calc(100vh - 200px)"
         >
           <VStack 
-            spacing={4}
-            position="absolute"
-            bottom="40px"
-            left="0"
-            right="0"
-            padding="20px"
-            background="rgba(255, 255, 255, 0.9)"
+            spacing={20}
+            width="100%"
+            maxWidth="600px"
           >
-            <Text fontSize="lg">{currentQuestion.text}</Text>
-            <HStack spacing={4} justifyContent="center">
-              <Button colorScheme="green" onClick={() => handleAnswer(true)}>
-                예
-              </Button>
-              <Button colorScheme="red" onClick={() => handleAnswer(false)}>
-                아니오
-              </Button>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Text 
+                fontSize="2xl" 
+                fontFamily='"UhBeeSe_hyun", serif'
+                textAlign="center"
+                color="purple.600"
+                mb={6}
+              >
+                {currentQuestion.text}
+              </Text>
+            </motion.div>
+            <HStack spacing={6} width="100%" justifyContent="center">
+              <motion.div
+                animate={{ 
+                  rotate: [0, 3, -3, 0],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.2 }
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button 
+                  onClick={() => handleAnswer(true)}
+                  size="lg"
+                  height="80px"
+                  width="180px"
+                  fontSize="xl"
+                  bg="purple.400"
+                  color="white"
+                  _hover={{ 
+                    bg: "purple.500",
+                    transform: "translateY(-5px)",
+                    boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.3)"
+                  }}
+                  boxShadow="0px 4px 10px rgba(0, 0, 0, 0.2)"
+                  borderRadius="xl"
+                  transition="all 0.3s ease"
+                >
+                  예
+                </Button>
+              </motion.div>
+              <motion.div
+                animate={{ 
+                  rotate: [0, -3, 3, 0],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.2 }
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button 
+                  onClick={() => handleAnswer(false)}
+                  size="lg"
+                  height="80px"
+                  width="180px"
+                  fontSize="xl"
+                  bg="pink.400"
+                  color="white"
+                  _hover={{ 
+                    bg: "pink.500",
+                    transform: "translateY(-5px)",
+                    boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.3)"
+                  }}
+                  boxShadow="0px 4px 10px rgba(0, 0, 0, 0.2)"
+                  borderRadius="xl"
+                  transition="all 0.3s ease"
+                >
+                  아니오
+                </Button>
+              </motion.div>
             </HStack>
           </VStack>
         </Box>
