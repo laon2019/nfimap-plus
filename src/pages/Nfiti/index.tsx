@@ -10,6 +10,11 @@ const Nfiti = ({ onStartTest }: NfitiProps) => {
     'image/nfiti/result/ENF.png',
     'image/nfiti/result/ENT.png',
     'image/nfiti/result/EST.png',
+    'image/nfiti/result/ESF.png',
+    'image/nfiti/result/IST.png',
+    'image/nfiti/result/ISF.png',
+    'image/nfiti/result/INT.png',
+    'image/nfiti/result/INF.png',
   ];
 
   const [currentImage, setCurrentImage] = useState(images[0]);
