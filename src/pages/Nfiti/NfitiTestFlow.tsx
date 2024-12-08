@@ -17,7 +17,7 @@ const NfititTestFlow = () => {
   const setBgColor = useSetRecoilState(bgColorState);
 
   useEffect(() => {
-    setBgColor("blue.100");
+    setBgColor("purple.600");
   }, []);
 
   const handleStartTest = () => {
@@ -39,22 +39,23 @@ const NfititTestFlow = () => {
   };
 
   const calculateResult = () => {
-    const group1 = [1, 2, 3];
-    const group2 = [4, 5, 6];
-    const group3 = [7, 8, 9]; 
+    const group1 = [1, 4, 6]; // true면 E, false면 I
+    const group2 = [2, 7, 9]; // true면 S, false면 N
+    const group3 = [3, 5, 8]; // true면 T, false면 F
 
     const countTrueInGroup = (group: number[]) =>
       group.reduce((acc, id) => acc + (answers[id] ? 1 : 0), 0);
 
     const eOrI = countTrueInGroup(group1) > group1.length / 2 ? "E" : "I";
     const sOrN = countTrueInGroup(group2) > group2.length / 2 ? "S" : "N";
-    const fOrT = countTrueInGroup(group3) > group3.length / 2 ? "F" : "T";
+    const fOrT = countTrueInGroup(group3) > group3.length / 2 ? "T" : "F";
 
     const resultCode = `${eOrI}${sOrN}${fOrT}` as keyof typeof RESULT_DESCRIPTIONS;
 
     setTestResult(RESULT_DESCRIPTIONS[resultCode]);
     setTestStage("result");
-  };
+};
+
 
   const handleRestartTest = () => {
     setTestStage("intro");

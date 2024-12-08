@@ -6,26 +6,6 @@ interface NfitiProps {
 }
 
 const Nfiti = ({ onStartTest }: NfitiProps) => {
-  const images = [
-    'image/nfiti/result/ENF.png',
-    'image/nfiti/result/ENT.png',
-    'image/nfiti/result/EST.png',
-    'image/nfiti/result/ESF.png',
-    'image/nfiti/result/IST.png',
-    'image/nfiti/result/ISF.png',
-    'image/nfiti/result/INT.png',
-    'image/nfiti/result/INF.png',
-  ];
-
-  const [currentImage, setCurrentImage] = useState(images[0]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * images.length);
-      setCurrentImage(images[randomIndex]);
-    }, 200);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <Box position="relative" w="100%" h="calc(100vh - 68px)" overflow="hidden">
@@ -39,7 +19,7 @@ const Nfiti = ({ onStartTest }: NfitiProps) => {
         borderRadius="md"
         overflow="hidden"
       >
-        <Image src={currentImage} alt="랜덤 이미지" objectFit="contain" />
+        <Image src="/image/nfiti/start/00_START_PAGE_animation.gif" alt="랜덤 이미지" objectFit="contain" />
       </Flex>
 
       <Flex h="150px" justifyContent="center" alignItems="center" p="20px 80px">

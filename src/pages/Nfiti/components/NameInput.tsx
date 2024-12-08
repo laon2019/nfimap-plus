@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { VStack, Input, Button, Box, Text, Flex } from "@chakra-ui/react";
+import { Flex, Input, Button, Box, Image, VStack, Center } from "@chakra-ui/react";
 
 interface NameInputProps {
   name: string;
@@ -10,90 +10,123 @@ interface NameInputProps {
 const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  // Handle key press for submitting
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       onSubmit();
     }
   };
 
+  // Handle input changes with character limits
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length <= 5) {
-      setName(e.target.value);
+    const value = e.target.value;
+    const isKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(value); // Check for Korean characters
+
+    if ((isKorean && value.length <= 3) || (!isKorean && value.length <= 5)) {
+      setName(value);
     }
   };
 
- useEffect(() => {
-  const canvas = canvasRef.current;
-  if (!canvas) return;
+  // Update the canvas text
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
+        // Set font and style
+        ctx.font = '40px "UhBeeSe_hyun", serif';
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#000";
 
-  const img = new Image();
-  img.src = "/image/nfiti/name/01_NAMING_PAGE_BG.png";
-
-  img.onload = () => {
-    canvas.width = 400;
-    canvas.height = 650;
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-    // 텍스트 스타일 설정
-    ctx.font = "32px 'UhBeeSe_hyun', serif";
-    ctx.fillStyle = "#333";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-
-    // 텍스트 위치 계산 (중앙)
-    const x = canvas.width / 2;
-    const y = canvas.height / 2 + 15;
-    ctx.fillText(name || "", x, y);
-  };
-}, [name]);
-
+        // Draw text at the center
+        ctx.fillText(name, canvas.width / 2, canvas.height / 2 + 20); // Adjusted position for alignment
+      }
+    }
+  }, [name]);
 
   return (
-    <VStack spacing={4} align="center">
-      {/* Canvas */}
-      <Flex justifyContent="center" alignItems="center">
-        <canvas
-          ref={canvasRef}
-          style={{
-            borderRadius: "8px",
-            maxWidth: "100%",
-          }}
-        />
-      </Flex>
-
-      {/* Input 박스 */}
-       <Box
-        position="absolute"
-        bottom="200px"
-        left="50%"
-        transform="translateX(-50%)"
-        w="100%"
-        maxW="480px"
-        display="flex"
+    <Flex 
+      h="calc(100vh - 68px)" 
+      flexDirection="column" 
+      justifyContent="space-between" 
+      alignItems="center"
+    >
+      <VStack 
+        flex="1" 
+        spacing={0} 
+        w="full" 
+        alignItems="center" 
         justifyContent="center"
-        alignItems="center"
-        gap="8px"
       >
+        <Image 
+          src="/image/nfiti/name/01_NAMING_PAGE_character.gif" 
+          alt="캐릭터" 
+          w="100%" 
+          maxW="500px"
+        />
+        <Image 
+          src="/image/nfiti/name/01_NAMING_PAGE_name.png" 
+          alt="네임 배경" 
+          w="100%" 
+          maxW="500px"
+        />
+
+        <Box 
+          position="relative" 
+          w="100%" 
+          maxW="400px" 
+          h="200px" 
+          mb={4}
+        >
+          <canvas
+            ref={canvasRef} 
+            width={400} 
+            height={200} 
+            style={{ 
+              position: "absolute", 
+              top: 0, 
+              left: 0, 
+              zIndex: 10 
+            }} 
+          />
+          <Image 
+            src="/image/nfiti/name/01_NAMING_PAGE_nametag.png" 
+            alt="네임 태그" 
+            w="100%" 
+            position="absolute"
+            top={0}
+            left={0}
+          />
+        </Box>
+        <Image 
+          src="/image/nfiti/name/01_NAMING_PAGE_segeulja.png" 
+          alt="세글자 이미지" 
+          w="100%" 
+          maxW="500px"
+        />
+      </VStack>
+      <Box w="100%" px={4} py={6} bg="white" boxShadow="md">
         <Input
           placeholder="이름을 입력하세요"
           value={name}
           onChange={handleChange}
           onKeyPress={handleKeyPress}
           maxLength={5}
-          w="200px"
-          h="48px"
           textAlign="center"
-          flex="1"
-          maxW="60%"
+          fontSize="lg"
+          w="100%"
+          bg="gray.50"
+          borderRadius="md"
+          _focus={{ borderColor: "purple.600", bg: "white" }}
         />
-        <Button colorScheme="blue" onClick={onSubmit} flexShrink="0" w="80px" h="48px">
-          제출
+        <Button mt={4} colorScheme="purple" w="100%" onClick={onSubmit}>
+          저장
         </Button>
       </Box>
-    </VStack>
+    </Flex>
   );
 };
 
