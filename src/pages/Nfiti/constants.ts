@@ -120,7 +120,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "그들의 무대가 진짜 가치 있고 멋지거든.",
       keyPoints: {
-        title: "비장의 무기 : 꼼꼼한 덕질 일지와 공연 분석 노트!",
+        title: "꼼꼼한 덕질 일지와 공연 분석 노트!",
         description: [
           "외부에 드러나는 활동은 적지만, 마음속엔 깊은 팬심이 자리 잡고 있어요.",
           "엔플라잉의 활동에 대한 세부적인 정보를 수집하고, 이를 차분하게 분석하며 점차 더 큰 애정을 쌓아가죠.",
@@ -154,7 +154,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "그들의 무대가 내게 소소한 행복이야.",
       keyPoints: {
-        title: "비장의 무기 : 그날의 기억이 담겨 있는 사진첩과 굿즈!",
+        title: "그날의 기억이 담겨 있는 사진첩과 굿즈!",
         description: [
           "엔피아 활동을 통해 내적인 만족을 얻고, 자신만의 방식으로 덕질을 즐깁니다.",
           "엔플라잉의 무대 위 작은 제스처나 팬들을 향한 마음을 놓치지 않고 포착하며, 그 감동적인 순간들을 마음속 깊이 새깁니다.",
@@ -188,7 +188,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "그들의 무대가 마음속 깊이 울림을 주거든.",
       keyPoints: {
-        title: "비장의 무기 : 진심 어린 응원의 메시지와 공감 가득한 후기!",
+        title: "진심 어린 응원의 메시지와 공감 가득한 후기!",
         description: [
           "엔플라잉의 무대에서 느낀 깊은 감동을 마음 깊이 오래도록 간직하는 타입이에요.",
           "멤버들의 작은 행동과 사소한 표현에서도 의미를 발견하며, 그 순간을 공유할 때 더욱 큰 행복을 느낍니다.",
@@ -224,7 +224,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "그들의 무대가 나를 깊게 생각하게 만들거든.",
       keyPoints: {
-        title: "비장의 무기 : 나만의 엔플라잉 플리와 가사 분석 노트!",
+        title: "나만의 엔플라잉 플리와 가사 분석 노트!",
         description: [
           "단순한 감상을 넘어서, 음악과 스토리에서 의미를 찾아내는데 진심인 타입!",
           "공연을 본 후에는 그 경험을 자신만의 방식으로 해석하며, 엔플라잉의 음악적 진화에 대해 깊이 탐구합니다.",
@@ -258,7 +258,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "그들의 무대가 나에게 에너지를 준다니까!",
       keyPoints: {
-        title: "비장의 무기 : 응원봉과 자신만의 시그니처 응원법!",
+        title: "응원봉과 자신만의 시그니처 응원법!",
         description: [
           "엔플라잉의 무대에서 받는 에너지가 내 삶의 원동력!",
           "누구보다 빠르게 티켓팅에 성공하고, 공연장에서 열정적으로 응원하며 에너지를 뿜어내요.",
@@ -289,7 +289,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "무대에서 느껴지는 멤버들의 진심이 마음을 울려서!",
       keyPoints: {
-        title: "비장의 무기 : 감동을 나누는 따뜻한 코멘트와 응원 메시지!",
+        title: "감동을 나누는 따뜻한 코멘트와 응원 메시지!",
         description: [
           "무대 위 작은 순간에도 멤버들의 진심을 느끼며 깊은 감동을 받는 타입입니다.",
           "엔피아들과 감정을 나누고 공감하며 소통하는 데 큰 기쁨을 찾습니다.",
@@ -322,7 +322,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "그들의 무대가 내 마음속 불꽃을 일으키거든!",
       keyPoints: {
-        title: "비장의 무기 : 진심 가득한 팬레터와 감동적인 한 마디!",
+        title: "진심 가득한 팬레터와 감동적인 한 마디!",
         description: [
           "공연에서 느낀 감정을 가장 소중히 여기며, 그 감동을 팬들과 나누는 것을 즐깁니다.",
           "공연에 몰입해 멤버들의 감정에 깊이 공감하며, 그 순간의 여운을 나누며 뜨거운 응원을 이끌어냅니다.",
@@ -357,7 +357,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reasonText: "매 무대마다 새로운 재미가 있거든!",
       keyPoints: {
         title:
-          "비장의 무기 : 아이디어 노트와 최신 소식을 놓치지 않는 빠른 알림창!",
+          "아이디어 노트와 최신 소식을 놓치지 않는 빠른 알림창!",
         description: [
           "최신 정보와 인터뷰를 빠르게 파악하고, 엔플라잉의 무대와 음악을 다양한 시각에서 탐구하는 타입이에요.",
           "그 속에서 새로운 재미와 의미를 발견하고, 이를 엔피아들과 공유하며 트렌드를 선도합니다.",

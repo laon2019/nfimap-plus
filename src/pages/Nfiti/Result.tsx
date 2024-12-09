@@ -2,14 +2,15 @@ import {
   Flex,
   Image,
   Box,
-  Button,
-  Spinner,
   Text,
   VStack,
   Heading,
   Divider,
   List,
   ListItem,
+  Badge,
+  Container,
+  Stack,
 } from "@chakra-ui/react";
 import React, { useState, useRef, useEffect } from "react";
 
@@ -100,169 +101,209 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
   };
 
   return (
-    <Box>
-      <Flex direction="column" align="center" gap={6} p={4}>
-        {isLoading ? (
-          <Flex
-            position="fixed" // 화면 정중앙 고정
-            top="50%"
-            left="50%"
-            transform="translate(-50%, -50%)" // 화면 중심으로 정렬
-            flexDirection="column"
-            justify="center"
-            align="center"
-            p={8}
-          >
-            <Image
-              src="/image/nfiti/loading/loading-gif.gif"
-              alt="로딩 이미지"
-              width="100px"
-              height="100px"
-              objectFit="contain"
-              objectPosition="center"
-            />
-            <Text
-              fontSize="2xl"
-              fontFamily='"UhBeeSe_hyun", serif'
-              textAlign="center"
-              color="purple.600"
-              mt={4} // 이미지와 텍스트 간격 조정
-            >
-              로딩중...
-            </Text>
-          </Flex>
-        ) : imageLoaded ? (
-          <canvas
-            ref={canvasRef}
-            style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "10px",
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-            }}
-          />
-        ) : null}
-        {imageLoaded && (
-          <Flex
-            w="100%"
-            justifyContent="space-between"
-            alignItems="center"
-            mt={4}
-            px={4}
-          >
-            <Image
-              src="/image/Final_UI_save.svg"
-              alt="저장"
-              w="45%"
-              h="auto"
-              cursor="pointer"
-              onClick={handleSaveClick}
-              _hover={{
-                transform: "scale(1.05)",
-              }}
-              _active={{
-                transform: "scale(0.95)",
-              }}
-            />
-            <Image
-              src="/image/Final_UI_share.svg"
-              alt="공유"
-              w="45%"
-              h="auto"
-              cursor="pointer"
-              onClick={handleShareClick}
-              _hover={{
-                transform: "scale(1.05)",
-              }}
-              _active={{
-                transform: "scale(0.95)",
-              }}
-            />
-          </Flex>
-        )}
-        {imageLoaded && (
-          <VStack spacing={4} align="stretch" w="100%">
-            <Heading size="lg" textAlign="center" color="blue.600">
-              {testResult?.title}
-            </Heading>
-            <Divider />
-            <Box p={4} bg="gray.100" borderRadius="md" boxShadow="sm">
-              <Text fontWeight="bold" mb={2} textAlign="center">
-                {testResult?.details.reason}
-              </Text>
-              <Text color="gray.700" textAlign="center">
-                {testResult?.details.reasonText}
-              </Text>
-            </Box>
-            <Box p={4} bg="gray.50" borderRadius="md" boxShadow="sm">
-              <Heading size="md" mb={4}>
-                {testResult?.details.keyPoints.title}
-              </Heading>
-              <List spacing={2}>
-                {testResult?.details.keyPoints.description.map(
-                  (desc: string, idx: number) => (
-                    <ListItem key={idx} color="gray.600" fontSize="sm">
-                      - {desc}
-                    </ListItem>
-                  )
-                )}
-              </List>
-            </Box>
-            <Box p={4} bg="gray.50" borderRadius="md" boxShadow="sm">
-              <Heading size="md" mb={4}>
-                {testResult?.details.dayPlan.title}
-              </Heading>
-              <List spacing={2}>
-                {testResult?.details.dayPlan.description.map(
-                  (desc: string, idx: number) => (
-                    <ListItem key={idx} color="gray.600" fontSize="sm">
-                      - {desc}
-                    </ListItem>
-                  )
-                )}
-              </List>
-            </Box>
-            <Text textAlign="center" color="blue.400" fontWeight="bold">
-              {testResult?.details.hashtags}
-            </Text>
-          </VStack>
-        )}
-        {imageLoaded && (
-          <Box
-            position="relative"
-            w="90%"
-            onClick={handleRestartTest}
-            cursor="pointer"
-            _hover={{
-              transform: "scale(1.05)",
-            }}
-            _active={{
-              transform: "scale(0.95)",
-            }}
-          >
-            <Image
-              src="/image/nfiti/questions/blueBtn.png"
-              alt="파랑"
-              w="100%"
-            />
-            <Text
-              position="absolute"
-              w="70%"
+    <Box fontFamily='"nanumfont", sans-serif'>
+      <Container maxW="container.md" py={8}>
+        <Flex direction="column" align="center" gap={6}>
+          {isLoading ? (
+            <Flex
+              position="fixed"
               top="50%"
               left="50%"
               transform="translate(-50%, -50%)"
-              fontSize="48px"
-              color="black"
-              fontWeight="bold"
-              fontFamily='"UhBeeSe_hyun", serif'
-              textAlign="center"
-              whiteSpace="pre-line"
+              flexDirection="column"
+              justify="center"
+              align="center"
+              p={8}
             >
-              다시하기
-            </Text>
-          </Box>
-        )}
-      </Flex>
+              <Image
+                src="/image/nfiti/loading/loading-gif.gif"
+                alt="로딩 이미지"
+                width="100px"
+                height="100px"
+                objectFit="contain"
+                objectPosition="center"
+              />
+              <Text
+                fontSize="2xl"
+                fontFamily='"UhBeeSe_hyun", serif'
+                textAlign="center"
+                color="purple.600"
+                mt={4}
+              >
+                로딩중...
+              </Text>
+            </Flex>
+          ) : imageLoaded ? (
+            <canvas
+              ref={canvasRef}
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "15px",
+                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
+              }}
+            />
+          ) : null}
+
+          {imageLoaded && (
+            <Stack spacing={6} w="full">
+              {/* Save and Share Buttons */}
+              <Flex
+                w="full"
+                justifyContent="space-between"
+                alignItems="center"
+                px={4}
+              >
+                <Image
+                  src="/image/Final_UI_save.svg"
+                  alt="저장"
+                  w="45%"
+                  h="auto"
+                  cursor="pointer"
+                  transition="transform 0.2s"
+                  _hover={{
+                    transform: "scale(1.05)",
+                  }}
+                  _active={{
+                    transform: "scale(0.95)",
+                  }}
+                  onClick={handleSaveClick}
+                />
+                <Image
+                  src="/image/Final_UI_share.svg"
+                  alt="공유"
+                  w="45%"
+                  h="auto"
+                  cursor="pointer"
+                  transition="transform 0.2s"
+                  _hover={{
+                    transform: "scale(1.05)",
+                  }}
+                  _active={{
+                    transform: "scale(0.95)",
+                  }}
+                  onClick={handleShareClick}
+                />
+              </Flex>
+
+              {/* Result Title */}
+              <Heading
+                size="xl"
+                textAlign="center"
+                color="blue.600"
+                mb={4}
+                fontWeight="bold"
+                letterSpacing="tight"
+              >
+                {testResult?.title}
+              </Heading>
+
+              <Divider border="2px" borderColor="blue.200" />
+
+              {/* Reason Section */}
+              <Box
+                bg="white"
+                p={6}
+                borderRadius="xl"
+                boxShadow="md"
+                textAlign="center"
+              >
+                <Text fontWeight="bold" fontSize="lg" color="blue.700" mb={3}>
+                  {testResult?.details.reason}
+                </Text>
+                <Text color="gray.600" lineHeight="tall">
+                  {testResult?.details.reasonText}
+                </Text>
+              </Box>
+
+              {/* Key Points */}
+              <Box bg="white" p={6} borderRadius="xl" boxShadow="md">
+                <Heading size="xl" mb={4} color="blue.600" textAlign="center">
+                🔥비장의 무기🔥
+                </Heading>
+                <Heading size="md" mb={4} color="blue.600" textAlign="center">
+                  {testResult?.details.keyPoints.title}
+                </Heading>
+                <List spacing={3}>
+                  {testResult?.details.keyPoints.description.map(
+                    (desc: string, idx: number) => (
+                      <ListItem
+                        key={idx}
+                        color="gray.700"
+                        fontSize="md"
+                        display="flex"
+                        alignItems="center"
+                      >
+                        <Text fontSize="8px" mr={2}>
+                          ●
+                        </Text>
+
+                        {desc}
+                      </ListItem>
+                    )
+                  )}
+                </List>
+              </Box>
+
+              {/* Day Plan */}
+              <Box bg="white" p={6} borderRadius="xl" boxShadow="md">
+                <Heading size="md" mb={4} color="blue.600" textAlign="center">
+                  {testResult?.details.dayPlan.title}
+                </Heading>
+                <List spacing={3}>
+                  {testResult?.details.dayPlan.description.map(
+                    (desc: string, idx: number) => (
+                      <ListItem
+                        key={idx}
+                        color="gray.700"
+                        fontSize="md"
+                        display="flex"
+                        alignItems="center"
+                      >
+                        <Text fontSize="8px" mr={2}>
+                          ●
+                        </Text>
+                        {desc}
+                      </ListItem>
+                    )
+                  )}
+                </List>
+              </Box>
+
+              {/* Hashtags */}
+              <Flex
+                wrap="wrap"
+                justifyContent="center"
+                gap={2}
+                p={4}
+                bg="blue.50"
+                borderRadius="xl"
+              >
+                {testResult?.details.hashtags.split(",").map((tag, idx) => (
+                  <Badge key={idx} bg="blue.50" fontSize="sm">
+                    {tag.trim()}
+                  </Badge>
+                ))}
+              </Flex>
+
+              <Box
+                position="relative"
+                w="100%"
+                onClick={handleRestartTest}
+                cursor="pointer"
+                _hover={{
+                  transform: "scale(1.05)",
+                }}
+                _active={{
+                  transform: "scale(0.95)",
+                }}
+              >
+                <Image src="/image/nfiti/retry.png" alt="다시하기" w="100%" />
+              </Box>
+            </Stack>
+          )}
+        </Flex>
+      </Container>
     </Box>
   );
 };

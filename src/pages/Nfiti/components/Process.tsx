@@ -32,10 +32,10 @@ const Process = ({
   questions,
 }: ProcessProps) => {
   const currentQuestion = questions[currentQuestionIndex];
+  // Adjust progress calculation to ensure exact 9-segment movement
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
-  // Calculate current SVG index (0-8)
-  const svgIndex = Math.min(Math.floor(progress / 12.5), 8);
+  const svgIndex = Math.min(Math.floor(progress / 11.11), 9);
 
   return (
     <Box height="calc(100vh - 68px)" p={4}>
@@ -54,48 +54,31 @@ const Process = ({
           <motion.div
             style={{
               position: "absolute",
-              top: "10%",
-              right: `${100 - progress - 5}%`,
-              transform: "translateY(-50%)",
+              top: "-10px",
+              left: "10px",
+              width: "85%",
+              height: "100%",
               zIndex: "2",
-              width: "100px",
-              height: "100px",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              overflow: "hidden",
             }}
             initial={{
-              right: "100%",
-              width: "100px",
-              height: "100px",
+              x: "-100%",
             }}
             animate={{
-              right: `${100 - progress - 5}%`,
+              x: `calc(${progress}% - 20px)`,
             }}
             transition={{ duration: 0.2 }}
           >
-            <Box
+            <Image
+              src="/image/nfiti/loading/loading-gif.gif"
+              alt="로딩 이미지"
               width="100px"
               height="100px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              overflow="hidden"
-            >
-              <Image
-                src="/image/nfiti/loading/loading-gif.gif"
-                alt="로딩 이미지"
-                width="100px"
-                height="100px"
-                objectFit="contain"
-                objectPosition="center"
-                position="absolute"
-                top="50%"
-                left="50%"
-                transform="translate(-50%, -50%)"
-              />
-            </Box>
+              objectFit="contain"
+              objectPosition="center"
+              zIndex="3"
+            />
           </motion.div>
         </Box>
 
@@ -114,7 +97,7 @@ const Process = ({
             >
               <Text
                 fontSize="2xl"
-                fontFamily='"UhBeeSe_hyun", serif'
+                fontFamily='"nanumfont", sans-serif'
                 textAlign="center"
                 color="purple.600"
                 mb={6}
@@ -153,7 +136,7 @@ const Process = ({
               fontSize="16px"
               color="black"
               fontWeight="bold"
-              fontFamily='"UhBeeSe_hyun", serif'
+              fontFamily='"nanumfont", sans-serif'
               textAlign="center"
               whiteSpace="pre-line"
             >
@@ -188,7 +171,7 @@ const Process = ({
               fontSize="16px"
               color="black"
               fontWeight="bold"
-              fontFamily='"UhBeeSe_hyun", serif'
+              fontFamily='"nanumfont", sans-serif'
               textAlign="center"
               whiteSpace="pre-line"
             >
