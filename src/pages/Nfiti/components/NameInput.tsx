@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from "react";
-import { Flex, Input, Button, Box, Image, VStack, Center } from "@chakra-ui/react";
+import React, { useRef, useLayoutEffect } from "react";
+import { Flex, Input, Button, Box, Image, VStack } from "@chakra-ui/react";
 
 interface NameInputProps {
   name: string;
@@ -27,25 +27,40 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
     }
   };
 
-  // Update the canvas text
-  useEffect(() => {
+  // Render everything before main rendering
+  useLayoutEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
       const ctx = canvas.getContext("2d");
       if (ctx) {
-        // Clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Set font and style
         ctx.font = '40px "UhBeeSe_hyun", serif';
         ctx.textAlign = "center";
         ctx.fillStyle = "#000";
-
-        // Draw text at the center
-        ctx.fillText(name, canvas.width / 2, canvas.height / 2 + 20); // Adjusted position for alignment
+        ctx.fillText(name, canvas.width / 2, canvas.height / 2 + 20);
       }
     }
   }, [name]);
+
+  // Preload images before rendering
+  const preloadImages = [
+    "/image/nfiti/name/01_NAMING_PAGE_character.gif",
+    "/image/nfiti/name/01_NAMING_PAGE_name.png",
+    "/image/nfiti/name/01_NAMING_PAGE_nametag.png",
+    "/image/nfiti/name/01_NAMING_PAGE_segeulja.png"
+  ];
+
+  const preloadAllImages = () => {
+    preloadImages.forEach((src) => {
+      const img = new (window as any).Image() as HTMLImageElement;
+      img.src = src;
+    });
+  };
+
+  // Preload images on mount
+  useLayoutEffect(() => {
+    preloadAllImages();
+  }, []);
 
   return (
     <Flex 
@@ -73,7 +88,6 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
           w="100%" 
           maxW="500px"
         />
-
         <Box 
           position="relative" 
           w="100%" 
@@ -95,7 +109,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
           <Image 
             src="/image/nfiti/name/01_NAMING_PAGE_nametag.png" 
             alt="네임 태그" 
-            w="100%" 
+            w="100%"
             position="absolute"
             top={0}
             left={0}
@@ -108,6 +122,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
           maxW="500px"
         />
       </VStack>
+
       <Box w="100%" px={4} py={6} bg="white" boxShadow="md">
         <Input
           placeholder="이름을 입력하세요"

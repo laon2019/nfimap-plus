@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import {
   Box,
   VStack,
@@ -32,10 +32,37 @@ const Process = ({
   questions,
 }: ProcessProps) => {
   const currentQuestion = questions[currentQuestionIndex];
-  // Adjust progress calculation to ensure exact 9-segment movement
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 90;
 
-  const svgIndex = Math.min(Math.floor(progress / 11.11), 9);
+  const svgIndex = Math.min(Math.floor(progress / 10), 9);
+
+  // 이미지 미리 불러오기
+  const preloadImages = [
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_1.svg`,
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_2.svg`,
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_3.svg`,
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_4.svg`,
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_5.svg`,
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_6.svg`,
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_7.svg`,
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_8.svg`,
+    `/image/nfiti/questions/02_QnA_PAGE_gauge_9.svg`,
+    "/image/nfiti/loading/loading-gif.gif",
+    "/image/nfiti/questions/blueBtn.png",
+    "/image/nfiti/questions/redBtn.png",
+  ];
+
+  const preloadAllImages = () => {
+    preloadImages.forEach((src) => {
+      const img = new (window as any).Image() as HTMLImageElement;
+      img.src = src;
+    });
+  };
+
+  // 렌더링 전에 이미지 미리 불러오기
+  useLayoutEffect(() => {
+    preloadAllImages();
+  }, []);
 
   return (
     <Box height="calc(100vh - 68px)" p={4}>
@@ -51,38 +78,20 @@ const Process = ({
             objectFit="cover"
             zIndex="1"
           />
-          <motion.div
-            style={{
-              position: "absolute",
-              top: "-10px",
-              left: "10px",
-              width: "85%",
-              height: "100%",
-              zIndex: "2",
-              display: "flex",
-              alignItems: "center",
-            }}
-            initial={{
-              x: "-100%",
-            }}
-            animate={{
-              x: `calc(${progress}% - 20px)`,
-            }}
-            transition={{ duration: 0.2 }}
-          >
-            <Image
-              src="/image/nfiti/loading/loading-gif.gif"
-              alt="로딩 이미지"
-              width="100px"
-              height="100px"
-              objectFit="contain"
-              objectPosition="center"
-              zIndex="3"
-            />
-          </motion.div>
+          <Image
+            src="/image/nfiti/loading/loading-gif.gif"
+            alt="로딩 이미지"
+            position="absolute"
+            h="100px"
+            w="100px"
+            left={`calc(${Math.max(0, Math.min(progress * 0.9, 80))}% - 10px)`}
+            top="5px"
+            transform="translateY(-50%)"
+            zIndex="2"
+          />
         </Box>
 
-        {/* Question Text */}
+        {/* 질문 텍스트 */}
         <Box
           flex="1"
           display="flex"
@@ -108,23 +117,21 @@ const Process = ({
             </motion.div>
           </VStack>
         </Box>
-        <Flex flexDirection="column" alignItems="center" gap={4}>
-          {/* Blue Button */}
+
+        <Flex flexDirection="column" alignItems="center" gap={4} mb={10}>
+          {/* 파랑 버튼 */}
           <Box
             position="relative"
             w="100%"
             onClick={() => handleAnswer(true)}
             cursor="pointer"
             _hover={{
-              transform: 'scale(1.05)',
-            }}
-            _active={{
-              transform: 'scale(0.95)',
+              transform: "scale(1.05)",
             }}
           >
             <Image
               src="/image/nfiti/questions/blueBtn.png"
-              alt="파랑"
+              alt="파랑 버튼"
               w="100%"
             />
             <Text
@@ -144,22 +151,19 @@ const Process = ({
             </Text>
           </Box>
 
-          {/* Red Button */}
+          {/* 빨강 버튼 */}
           <Box
             position="relative"
             w="100%"
             onClick={() => handleAnswer(false)}
             cursor="pointer"
             _hover={{
-              transform: 'scale(1.05)',
-            }}
-            _active={{
-              transform: 'scale(0.95)',
+              transform: "scale(1.03)",
             }}
           >
             <Image
               src="/image/nfiti/questions/redBtn.png"
-              alt="빨강"
+              alt="빨강 버튼"
               w="100%"
             />
             <Text

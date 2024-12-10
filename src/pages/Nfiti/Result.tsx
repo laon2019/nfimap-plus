@@ -12,7 +12,7 @@ import {
   Container,
   Stack,
 } from "@chakra-ui/react";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 
 interface TestResultDetails {
   reason: string;
@@ -50,6 +50,33 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
       setIsLoading(false);
       setImageLoaded(true);
     }, 2000);
+  }, []);
+
+  const preloadImages = [
+    `/image/nfiti/loading/loading-gif.gif`,
+    `/image/Final_UI_save.svg`,
+    `/image/Final_UI_share.svg`,
+    `/image/nfiti/retry.png`,
+    `/image/nfiti/result/INF.png`,
+    `/image/nfiti/result/INT.png`,
+    `/image/nfiti/result/ISF.png`,
+    `/image/nfiti/result/IST.png`,
+    `/image/nfiti/result/ENF.png`,
+    `/image/nfiti/result/ENT.png`,
+    `/image/nfiti/result/EST.png`,
+    `/image/nfiti/result/ESF.png`,
+  ];
+
+  const preloadAllImages = () => {
+    preloadImages.forEach((src) => {
+      const img = new (window as any).Image() as HTMLImageElement;
+      img.src = src;
+    });
+  };
+
+  // 렌더링 전에 이미지 미리 불러오기
+  useLayoutEffect(() => {
+    preloadAllImages();
   }, []);
 
   useEffect(() => {
@@ -219,7 +246,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
               {/* Key Points */}
               <Box bg="white" p={6} borderRadius="xl" boxShadow="md">
                 <Heading size="xl" mb={4} color="blue.600" textAlign="center">
-                🔥비장의 무기🔥
+                  🔥비장의 무기🔥
                 </Heading>
                 <Heading size="md" mb={4} color="blue.600" textAlign="center">
                   {testResult?.details.keyPoints.title}
@@ -279,11 +306,9 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                 bg="blue.50"
                 borderRadius="xl"
               >
-                {testResult?.details.hashtags.split(",").map((tag, idx) => (
-                  <Badge key={idx} bg="blue.50" fontSize="sm">
-                    {tag.trim()}
-                  </Badge>
-                ))}
+                {testResult?.details.hashtags
+                  .split(",")
+                  .map((tag, idx) => tag.trim())}
               </Flex>
 
               <Box
