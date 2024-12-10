@@ -6,43 +6,23 @@ interface NfitiProps {
 }
 
 const Nfiti = ({ onStartTest }: NfitiProps) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const preloadImages = [
+    "image/nfiti/start/00_START_PAGE_startN.svg",
+    "/image/nfiti/start/00_START_PAGE_animation.gif",
+    "image/nfiti/start/00_START_PAGE_startB.svg",
+  ];
 
+  const preloadAllImages = () => {
+    preloadImages.forEach((src) => {
+      const img = new (window as any).Image() as HTMLImageElement;
+      img.src = src;
+    });
+  };
+
+  // 렌더링 전에 이미지 미리 불러오기
   useLayoutEffect(() => {
-    const imageSources = [
-      "image/nfiti/start/00_START_PAGE_startN.svg",
-      "/image/nfiti/start/00_START_PAGE_animation.gif",
-      "image/nfiti/start/00_START_PAGE_startB.svg",
-    ];
-
-    const promises = imageSources.map((src) => {
-      return new Promise<void>((resolve) => {
-        const img = new (window as any).Image() as HTMLImageElement;
-        img.src = src;
-        img.onload = () => resolve();
-      });
-    });
-
-    Promise.all(promises).then(() => {
-      setIsLoaded(true);
-    });
+    preloadAllImages();
   }, []);
-
-  if (!isLoaded) {
-    // 로딩 중 상태를 보여주기 위해 간단한 로딩 UI를 추가
-    return (
-      <Box
-        position="relative"
-        w="100%"
-        h="calc(100vh - 68px)"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <p>로딩 중...</p>
-      </Box>
-    );
-  }
 
   return (
     <Box position="relative" w="100%" h="calc(100vh - 68px)" overflow="hidden">
