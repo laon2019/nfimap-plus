@@ -42,15 +42,10 @@ interface ResultProps {
 
 const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [showLoading, setShowLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-      setImageLoaded(true);
-    }, 2000);
-  }, []);
+  const loadingRef = useRef<HTMLDivElement>(null);
 
   const preloadImages = [
     `/image/nfiti/loading/loading-gif.gif`,
@@ -80,6 +75,28 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
   }, []);
 
   useEffect(() => {
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+      
+      // 로딩 화면을 페이드 아웃 효과로 숨기기
+      if (loadingRef.current) {
+        loadingRef.current.style.opacity = '0';
+        loadingRef.current.style.transition = 'opacity 0.5s ease-out';
+        
+        // 애니메이션 종료 후 완전히 제거
+        const fadeOutTimer = setTimeout(() => {
+          setShowLoading(false);
+          setImageLoaded(true);
+        }, 500);
+
+        return () => clearTimeout(fadeOutTimer);
+      }
+    }, 2000);
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
+
+  useEffect(() => {
     if (imageLoaded && canvasRef.current) {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
@@ -104,7 +121,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
 
       img.src = `${testResult?.imageUrl}`;
     }
-  }, [imageLoaded, name]);
+  }, [imageLoaded, name, testResult]);
 
   const handleSaveClick = () => {
     if (canvasRef.current) {
@@ -131,8 +148,9 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
     <Box fontFamily='"nanumfont", sans-serif'>
       <Container maxW="container.md" py={8}>
         <Flex direction="column" align="center" gap={6}>
-          {isLoading ? (
+          {showLoading && (
             <Flex
+              ref={loadingRef}
               position="fixed"
               top="50%"
               left="50%"
@@ -141,6 +159,10 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
               justify="center"
               align="center"
               p={8}
+              zIndex={10}
+              bg="white"
+              width="100%"
+              height="100%"
             >
               <Image
                 src="/image/nfiti/loading/loading-gif.gif"
@@ -161,7 +183,9 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                 로딩중...
               </Text>
             </Flex>
-          ) : imageLoaded ? (
+          )}
+
+          {imageLoaded && (
             <canvas
               ref={canvasRef}
               style={{
@@ -171,7 +195,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                 boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
               }}
             />
-          ) : null}
+          )}
 
           {imageLoaded && (
             <Stack spacing={6} w="full">
@@ -311,7 +335,15 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
               >
                 {testResult?.details.hashtags
                   .split(",")
-                  .map((tag, idx) => tag.trim())}
+                  .map((tag, idx) => (
+                    <Badge 
+                      key={idx} 
+                      colorScheme="blue" 
+                      variant="outline"
+                    >
+                      {tag.trim()}
+                    </Badge>
+                  ))}
               </Flex>
 
               <Box

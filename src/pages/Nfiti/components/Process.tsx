@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
   Box,
   VStack,
@@ -9,6 +9,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { convertToWebP } from "../../../utils/utils";
 
 interface Question {
   id: number;
@@ -35,22 +36,29 @@ const Process = ({
   const progress = ((currentQuestionIndex + 1) / questions.length) * 90;
 
   const svgIndex = Math.min(Math.floor(progress / 10), 9);
+  const [processedImages, setProcessedImages] = useState<string[]>([]);
 
-  // 이미지 미리 불러오기
+  // Preload images before rendering
   const preloadImages = [
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_1.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_2.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_3.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_4.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_5.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_6.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_7.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_8.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_9.svg`,
-    "/image/nfiti/loading/loading-gif.gif",
     "/image/nfiti/questions/blueBtn.png",
     "/image/nfiti/questions/redBtn.png",
   ];
+
+  const processImages = async () => {
+    try {
+      const processed = await Promise.all(
+        preloadImages.map((src) => convertToWebP(src))
+      );
+      setProcessedImages(processed);
+    } catch (error) {
+      console.error("Image processing error:", error);
+    }
+  };
+
+  useLayoutEffect(() => {
+    processImages();
+  }, []);
+  // 이미지 미리 불러오기
 
   const preloadAllImages = () => {
     preloadImages.forEach((src) => {
@@ -131,12 +139,14 @@ const Process = ({
               transform: "scale(1.05)",
             }}
           >
-            <Image
-              src="/image/nfiti/questions/blueBtn.png"
-              alt="파랑 버튼"
-              w="100%"
-              loading="lazy"
-            />
+            {processedImages[0] && (
+              <Image
+                src={processedImages[0]}
+                alt="파랑 버튼"
+                w="100%"
+                loading="lazy"
+              />
+            )}
             <Text
               position="absolute"
               w="70%"
@@ -164,12 +174,14 @@ const Process = ({
               transform: "scale(1.03)",
             }}
           >
-            <Image
-              src="/image/nfiti/questions/redBtn.png"
-              alt="빨강 버튼"
-              w="100%"
-              loading="lazy"
-            />
+            {processedImages[1] && (
+              <Image
+                src={processedImages[1]}
+                alt="빨강 버튼"
+                w="100%"
+                loading="lazy"
+              />
+            )}
             <Text
               position="absolute"
               w="70%"
