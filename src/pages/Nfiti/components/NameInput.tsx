@@ -81,12 +81,14 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
           alt="캐릭터" 
           w="100%" 
           maxW="500px"
+          loading="lazy"
         />
         <Image 
           src="/image/nfiti/name/01_NAMING_PAGE_name.png" 
           alt="네임 배경" 
           w="100%" 
           maxW="500px"
+          loading="lazy"
         />
         <Box 
           position="relative" 
@@ -113,6 +115,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
             position="absolute"
             top={0}
             left={0}
+            loading="lazy"
           />
         </Box>
         <Image 
@@ -120,6 +123,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
           alt="세글자 이미지" 
           w="100%" 
           maxW="500px"
+          loading="lazy"
         />
       </VStack>
 

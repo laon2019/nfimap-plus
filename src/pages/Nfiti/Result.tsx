@@ -149,6 +149,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                 height="100px"
                 objectFit="contain"
                 objectPosition="center"
+                loading="lazy"
               />
               <Text
                 fontSize="2xl"
@@ -195,6 +196,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                     transform: "scale(0.95)",
                   }}
                   onClick={handleSaveClick}
+                  loading="lazy"
                 />
                 <Image
                   src="/image/Final_UI_share.svg"
@@ -210,6 +212,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                     transform: "scale(0.95)",
                   }}
                   onClick={handleShareClick}
+                  loading="lazy"
                 />
               </Flex>
 
@@ -323,7 +326,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                   transform: "scale(0.95)",
                 }}
               >
-                <Image src="/image/nfiti/retry.png" alt="다시하기" w="100%" />
+                <Image src="/image/nfiti/retry.png" alt="다시하기" w="100%" loading="lazy" />
               </Box>
             </Stack>
           )}

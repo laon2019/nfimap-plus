@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import Home from './pages/Home';
-import NfititTestFlow from './pages/Nfiti/NfitiTestFlow';
-import NotFoundPage from './pages/NotFound';
+import Loading from './pages/Loading';
+
+// Lazy load the page components
+const Home = lazy(() => import('./pages/Home'));
+const NfititTestFlow = lazy(() => import('./pages/Nfiti/NfitiTestFlow'));
+const NotFoundPage = lazy(() => import('./pages/NotFound'));
 
 const App = () => {
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Nfiti" element={<NfititTestFlow />} />
-        <Route path="/*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<Loading /> }>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Nfiti" element={<NfititTestFlow />} />
+          <Route path="/*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </Layout>
   );
-}
+};
 
 export default App;

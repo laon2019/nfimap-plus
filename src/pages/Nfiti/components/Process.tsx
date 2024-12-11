@@ -77,6 +77,7 @@ const Process = ({
             w="100%"
             objectFit="cover"
             zIndex="1"
+            loading="lazy"
           />
           <Image
             src="/image/nfiti/loading/loading-gif.gif"
@@ -88,6 +89,7 @@ const Process = ({
             top="5px"
             transform="translateY(-50%)"
             zIndex="2"
+            loading="lazy"
           />
         </Box>
 
@@ -133,6 +135,7 @@ const Process = ({
               src="/image/nfiti/questions/blueBtn.png"
               alt="파랑 버튼"
               w="100%"
+              loading="lazy"
             />
             <Text
               position="absolute"
@@ -165,6 +168,7 @@ const Process = ({
               src="/image/nfiti/questions/redBtn.png"
               alt="빨강 버튼"
               w="100%"
+              loading="lazy"
             />
             <Text
               position="absolute"
