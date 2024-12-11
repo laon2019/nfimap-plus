@@ -29,6 +29,20 @@ const Nfiti = ({ onStartTest }: NfitiProps) => {
     processImages();
   }, []);
 
+  const preloads = [
+    "/image/nfiti/start/00_START_PAGE_animation.gif",
+  ];
+  const preloadAllImages = () => {
+    preloads.forEach((src) => {
+      const img = new (window as any).Image() as HTMLImageElement;
+      img.src = src;
+    });
+  };
+
+  useLayoutEffect(() => {
+    preloadAllImages();
+  }, []);
+
   return (
     <Box position="relative" w="100%" h="calc(100vh - 68px)" overflow="hidden">
       <Flex h="150px" justifyContent="center" alignItems="center" p="20px 40px">

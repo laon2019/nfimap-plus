@@ -66,6 +66,18 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
     }
   }, [name]);
 
+  const preloads = ["/image/nfiti/name/01_NAMING_PAGE_character.gif"];
+  const preloadAllImages = () => {
+    preloads.forEach((src) => {
+      const img = new (window as any).Image() as HTMLImageElement;
+      img.src = src;
+    });
+  };
+
+  useLayoutEffect(() => {
+    preloadAllImages();
+  }, []);
+
   return (
     <Flex
       h="calc(100vh - 68px)"
