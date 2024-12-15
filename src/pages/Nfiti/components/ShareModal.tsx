@@ -179,7 +179,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
   };
 
   const handleXShare = () => {
-    const encodedTitle = encodeURIComponent(shareTitle);
+    const encodedTitle = encodeURIComponent(shareTitle + shareDescription);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodeURIComponent(shareUrl)}`;
     window.open(twitterUrl, "_blank", "noopener,noreferrer");
   };

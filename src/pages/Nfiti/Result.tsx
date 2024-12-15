@@ -135,6 +135,17 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
     }
   };
 
+  const formatDetails = (result: any) => {
+    return `
+
+${result.details.reason}
+${result.details.reasonText}
+  
+${result.details.hashtags}`;
+  }
+  
+  const formattedResult = formatDetails(testResult);
+
   return (
     <Box fontFamily='"nanumfont", sans-serif'>
       <Container maxW="container.md" py={8}>
@@ -296,7 +307,8 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
         isOpen={isOpen}
         onClose={onClose}
         canvasRef={canvasRef}
-        shareTitle={testResult?.title || "테스트 결과"}
+        shareTitle={name+"(이)는 "+testResult?.title || "테스트 결과"}
+        shareDescription={formattedResult}
       />
     </Box>
   );
