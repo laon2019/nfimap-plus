@@ -63,7 +63,7 @@ const Process = ({
   }, []);
 
   return (
-    <Box height="calc(100vh - 68px)">
+    <Box height="calc(100vh - 68px)" p={2}>
       <VStack spacing={6} align="stretch" height="100%">
         <Box position="relative" h="30px">
           <Image
@@ -75,7 +75,7 @@ const Process = ({
             w="100%"
             objectFit="cover"
             zIndex="1"
-            loading="lazy"
+            loading="eager"
           />
           <Image
             src="/image/nfiti/loading/loading-gif.gif"
@@ -87,7 +87,7 @@ const Process = ({
             top="5px"
             transform="translateY(-50%)"
             zIndex="2"
-            loading="lazy"
+            loading="eager"
           />
         </Box>
 

@@ -44,9 +44,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
   // Handle input changes with character limits
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const isKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(value); // Check for Korean characters
-
-    if ((isKorean && value.length <= 3) || (!isKorean && value.length <= 5)) {
+    if (value.length <= 3) {
       setName(value);
     }
   };
@@ -97,7 +95,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
           alt="캐릭터"
           w="100%"
           maxW="500px"
-          loading="lazy"
+          loading="eager"
         />
         {processedImages[0] && (
           <Image
@@ -105,7 +103,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
             alt="네임 배경"
             w="100%"
             maxW="500px"
-            loading="lazy"
+            loading="eager"
           />
         )}
         <Box position="relative" w="100%" maxW="400px" h="200px" mb={4}>
@@ -128,7 +126,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
               position="absolute"
               top={0}
               left={0}
-              loading="lazy"
+              loading="eager"
             />
           )}
         </Box>
@@ -138,7 +136,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
             alt="세글자 이미지"
             w="100%"
             maxW="500px"
-            loading="lazy"
+            loading="eager"
           />
         )}
       </VStack>
@@ -149,7 +147,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
           value={name}
           onChange={handleChange}
           onKeyPress={handleKeyPress}
-          maxLength={5}
+          maxLength={3}
           textAlign="center"
           fontSize="lg"
           w="100%"

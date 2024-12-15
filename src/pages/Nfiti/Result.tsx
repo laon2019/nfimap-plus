@@ -6,10 +6,12 @@ import {
   Container,
   Stack,
   useDisclosure,
+  Link,
 } from "@chakra-ui/react";
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import ResultText from "./components/ResultText";
 import ShareModal from "./components/ShareModal";
+import { FaInstagram } from "react-icons/fa";
 
 interface TestResultDetails {
   reason: string;
@@ -20,7 +22,10 @@ interface TestResultDetails {
   };
   dayPlan: {
     title: string;
-    description: string[];
+    description: {
+      title: string;
+      content: string;
+    }[];
   };
   hashtags: string;
 }
@@ -73,7 +78,6 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
 
   useEffect(() => {
     const loadingTimer = setTimeout(() => {
-
       // 로딩 화면을 페이드 아웃 효과로 숨기기
       if (loadingRef.current) {
         loadingRef.current.style.opacity = "0";
@@ -158,7 +162,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                 height="100px"
                 objectFit="contain"
                 objectPosition="center"
-                loading="lazy"
+                loading="eager"
               />
               <Text
                 fontSize="2xl"
@@ -207,7 +211,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                     transform: "scale(0.95)",
                   }}
                   onClick={handleSaveClick}
-                  loading="lazy"
+                  loading="eager"
                 />
                 <Image
                   src="/image/Final_UI_share.svg"
@@ -223,12 +227,48 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                     transform: "scale(0.95)",
                   }}
                   onClick={onOpen}
-                  loading="lazy"
+                  loading="eager"
                 />
               </Flex>
 
               <ResultText testResult={testResult} />
-
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                mt={4}
+                p={3}
+                borderRadius="md"
+              >
+                <Link
+                  href="https://www.instagram.com/HOYEYE92"
+                  isExternal
+                  display="flex"
+                  alignItems="center"
+                  gap={2}
+                  _hover={{ textDecoration: "none" }}
+                >
+                  <Text
+                    fontFamily='"UhBeeSe_hyun", serif'
+                    fontSize="lg"
+                    fontWeight="800"
+                    color="purple"
+                    _hover={{
+                      color: "purple.500",
+                    }}
+                  >
+                    HOYEYE92
+                  </Text>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="center"
+                    boxSize="30px"
+                    bgGradient="linear(to-br, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)"
+                    borderRadius="full"
+                  >
+                    <FaInstagram color="white" size="20px" />
+                  </Flex>
+                </Link>
+              </Flex>
               <Box
                 position="relative"
                 w="100%"
@@ -245,7 +285,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
                   src="/image/nfiti/retry.png"
                   alt="다시하기"
                   w="100%"
-                  loading="lazy"
+                  loading="eager"
                 />
               </Box>
             </Stack>
