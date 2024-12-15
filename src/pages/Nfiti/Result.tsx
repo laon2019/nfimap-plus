@@ -38,7 +38,6 @@ interface ResultProps {
 }
 
 const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [showLoading, setShowLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -74,7 +73,6 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
 
   useEffect(() => {
     const loadingTimer = setTimeout(() => {
-      setIsLoading(false);
 
       // 로딩 화면을 페이드 아웃 효과로 숨기기
       if (loadingRef.current) {
