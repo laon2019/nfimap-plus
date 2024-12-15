@@ -19,7 +19,7 @@ const Header = () => {
           <Image
             src="/image/logo/logo.svg"
             alt="MyApp Logo"
-            boxSize="50px"
+            h="52px"
           />
         </Link>
       </Flex>

@@ -167,7 +167,7 @@ const Process = ({
                 src={processedImages[0]}
                 alt="파랑 버튼"
                 w="100%"
-                loading="lazy"
+                loading="eager"
               />
             )}
             <Text
@@ -202,7 +202,7 @@ const Process = ({
                 src={processedImages[1]}
                 alt="빨강 버튼"
                 w="100%"
-                loading="lazy"
+                loading="eager"
               />
             )}
             <Text
