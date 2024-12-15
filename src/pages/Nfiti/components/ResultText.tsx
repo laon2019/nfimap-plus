@@ -89,7 +89,7 @@ import {
             <Badge
               key={idx}
               bg="none"
-              fontSize="md"
+              fontSize="12px"
               px={3}
               py={1}
               borderRadius="md"
