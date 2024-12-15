@@ -58,7 +58,7 @@ const Nfiti = ({ onStartTest }: NfitiProps) => {
         overflow="hidden"
       >
         <Image
-          src="/image/nfiti/start/00_START_PAGE_animation.gif"
+          src="/image/nfiti/start/00_START_PAGE_animation.avifs"
           alt="랜덤 이미지"
           objectFit="contain"
           loading="eager"

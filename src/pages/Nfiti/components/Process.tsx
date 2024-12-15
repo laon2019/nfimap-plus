@@ -36,52 +36,19 @@ const Process = ({
   const progress = ((currentQuestionIndex + 1) / questions.length) * 90;
 
   const svgIndex = Math.min(Math.floor(progress / 10), 9);
-  const [processedImages, setProcessedImages] = useState<string[]>([]);
-
-  // Preload images before rendering
-  const preloadImages = [
-    "/image/nfiti/questions/blueBtn.png",
-    "/image/nfiti/questions/redBtn.png",
-  ];
-
-  const processImages = async () => {
-    try {
-      const processed = await Promise.all(
-        preloadImages.map((src) => convertToWebP(src))
-      );
-      setProcessedImages(processed);
-    } catch (error) {
-      console.error("Image processing error:", error);
-    }
-  };
-
-  useLayoutEffect(() => {
-    processImages();
-  }, []);
-  // 이미지 미리 불러오기
-
-  const preloadAllImages = () => {
-    preloadImages.forEach((src) => {
-      const img = new (window as any).Image() as HTMLImageElement;
-      img.src = src;
-    });
-  };
-
-  // 렌더링 전에 이미지 미리 불러오기
-  useLayoutEffect(() => {
-    preloadAllImages();
-  }, []);
 
   const preloads = [
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_1.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_2.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_3.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_4.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_5.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_6.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_7.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_8.svg`,
-    `/image/nfiti/questions/02_QnA_PAGE_gauge_9.svg`,
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_1.svg",
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_2.svg",
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_3.svg",
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_4.svg",
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_5.svg",
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_6.svg",
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_7.svg",
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_8.svg",
+    "/image/nfiti/questions/02_QnA_PAGE_gauge_9.svg",
+    "/image/nfiti/questions/redBtn.svg",
+    "/image/nfiti/questions/blueBtn.svg",
     "/image/nfiti/loading/loading-gif.gif",
   ];
   const preloadAllImage = () => {
@@ -96,7 +63,7 @@ const Process = ({
   }, []);
 
   return (
-    <Box height="calc(100vh - 68px)" p={4}>
+    <Box height="calc(100vh - 68px)">
       <VStack spacing={6} align="stretch" height="100%">
         <Box position="relative" h="30px">
           <Image
@@ -162,14 +129,12 @@ const Process = ({
               transform: "scale(1.05)",
             }}
           >
-            {processedImages[0] && (
-              <Image
-                src={processedImages[0]}
-                alt="파랑 버튼"
-                w="100%"
-                loading="eager"
-              />
-            )}
+            <Image
+              src="/image/nfiti/questions/blueBtn.svg"
+              alt="파랑 버튼"
+              w="100%"
+              loading="eager"
+            />
             <Text
               position="absolute"
               w="70%"
@@ -197,14 +162,12 @@ const Process = ({
               transform: "scale(1.03)",
             }}
           >
-            {processedImages[1] && (
               <Image
-                src={processedImages[1]}
+                src="/image/nfiti/questions/redBtn.svg"
                 alt="빨강 버튼"
                 w="100%"
                 loading="eager"
               />
-            )}
             <Text
               position="absolute"
               w="70%"
