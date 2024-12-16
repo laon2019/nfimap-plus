@@ -17,9 +17,9 @@ const Header = () => {
       <Flex justifyContent="center" flex="1">
         <Link to="/">
           <Image
-            src="/image/logo/logo.png"
+            src="/image/logo/logo.svg"
             alt="MyApp Logo"
-            h="52px"
+            h="64px"
           />
         </Link>
       </Flex>

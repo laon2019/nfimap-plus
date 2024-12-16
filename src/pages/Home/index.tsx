@@ -11,7 +11,7 @@ const Home = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    navigate('/Nfiti')
+    navigate('/nfiti')
   }, [navigate])
 
   return null

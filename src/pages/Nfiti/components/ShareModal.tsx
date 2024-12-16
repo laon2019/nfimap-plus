@@ -32,7 +32,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
   isOpen,
   onClose,
   canvasRef,
-  shareUrl = "https://nfimap-plus.co.kr/Nfiti",
+  shareUrl = "https://nfimap-plus.co.kr/nfiti",
   shareTitle = "NFITI 테스트 결과를 확인해보세요!",
   shareDescription = "",
 }) => {

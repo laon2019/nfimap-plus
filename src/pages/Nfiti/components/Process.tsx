@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   Box,
   VStack,
@@ -33,9 +33,30 @@ const Process = ({
   questions,
 }: ProcessProps) => {
   const currentQuestion = questions[currentQuestionIndex];
+  const [showLoading, setShowLoading] = useState(true);
+   const loadingRef = useRef<HTMLDivElement>(null);
   const progress = ((currentQuestionIndex + 1) / questions.length) * 90;
 
   const svgIndex = Math.min(Math.floor(progress / 10), 9);
+
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => {
+      // 로딩 화면을 페이드 아웃 효과로 숨기기
+      if (loadingRef.current) {
+        loadingRef.current.style.opacity = "0";
+        loadingRef.current.style.transition = "opacity 0.5s ease-out";
+
+        // 애니메이션 종료 후 완전히 제거
+        const fadeOutTimer = setTimeout(() => {
+          setShowLoading(false);
+        }, 600);
+
+        return () => clearTimeout(fadeOutTimer);
+      }
+    }, 1300);
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
 
   const preloads = [
     "/image/nfiti/questions/02_QnA_PAGE_gauge_1.svg",
@@ -64,6 +85,42 @@ const Process = ({
 
   return (
     <Box height="calc(100vh - 68px)" p={2}>
+      {showLoading && (
+            <Flex
+              ref={loadingRef}
+              position="fixed"
+              top="50%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              flexDirection="column"
+              justify="center"
+              align="center"
+              p={8}
+              zIndex={10}
+              bg="white"
+              width="100%"
+              height="100%"
+            >
+              <Image
+                src="/image/nfiti/loading/loading-gif.gif"
+                alt="로딩 이미지"
+                width="100px"
+                height="100px"
+                objectFit="contain"
+                objectPosition="center"
+                loading="eager"
+              />
+              <Text
+                fontSize="2xl"
+                fontFamily='"UhBeeSe_hyun", serif'
+                textAlign="center"
+                color="purple.600"
+                mt={4}
+              >
+                로딩중...
+              </Text>
+            </Flex>
+          )}
       <VStack spacing={6} align="stretch" height="100%">
         <Box position="relative" h="30px">
           <Image

@@ -15,7 +15,7 @@ const App = () => {
       <Suspense fallback={<Loading /> }>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Nfiti" element={<NfititTestFlow />} />
+          <Route path="/nfiti" element={<NfititTestFlow />} />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
