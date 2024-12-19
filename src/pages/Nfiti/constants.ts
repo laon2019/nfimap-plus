@@ -132,7 +132,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       },
       dayPlan: {
         title: "오늘도 무대에서 에너지를 받아야지!\n" +
-            "공연이 끝나면 피곤함보다 기쁨이 남는 타입!",
+            "공연 후 피곤함보다 기쁨이 남는 타입!",
         description: [
           {
             title: "열정 넘치는 행동력",
@@ -164,7 +164,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "멤버들의 진심이 내 마음을 울려서!",
       keyPoints: {
-        title: "감동을 나누는 따뜻한 코멘트와 응원 메시지!",
+        title: "감동 가득 따뜻한 코멘트와 응원 메시지!",
         description: [
           "무대 위 작은 순간에도 멤버들의 진심을 느끼며 깊은 감동을 받는 타입이에요.",
           "엔피아들과 감정을 나누고 공감하며 소통하는 데서 큰 기쁨을 찾습니다.",
@@ -172,7 +172,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
         ],
       },
       dayPlan: {
-        title: "무대에서 느낀 이 감동, 나 혼자만 알고 있을 수 없지!\n" +
+        title: "공연에서 느낀 이 감동,\n" +
             "엔피아들과 공유하면 두 배로 좋잖아?",
         description: [
           {
@@ -297,7 +297,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
         ],
       },
       dayPlan: {
-        title: "공연 당일의 계획은 이미 내 머릿속에 다 있어!\n" +
+        title: "계획은 이미 내 머릿속에 다 있어!\n" +
             "그 순간을 완벽하게 즐기는게 목표야.",
         description: [
           {
@@ -332,7 +332,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "그들의 무대가 내게 소소한 행복이야.",
       keyPoints: {
-        title: "그날의 기억이 담겨 있는 사진첩과 굿즈!",
+        title: "그날의 추억이 담긴 사진첩과 굿즈!",
         description: [
           "엔피아 활동을 통해 내적인 만족을 얻고, 자신만의 방식으로 덕질을 즐깁니다.",
           "엔플라잉의 무대 위 작은 제스처나 팬들을 향한 마음을 놓치지 않고 포착하며, 그 감동적인 순간들을 마음속 깊이 새깁니다.",
@@ -428,7 +428,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       dayPlan: {
         title:
             "오늘 공연에서 느낀 감동,\n" +
-            "나 혼자만 간직하기엔 너무 따뜻하고 소중하잖아.",
+            "나 혼자 간직하기엔 너무 소중하잖아.",
         description: [
           {
             title: "감성적이고 섬세한 마음",
