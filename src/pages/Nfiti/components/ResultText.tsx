@@ -251,7 +251,6 @@ import {
                       shadow="md"
                     >
                       <HStack spacing={3} mb={3}>
-                        <FaStar />
                         <Heading size="md" color="green.600">
                           {plan.title}
                         </Heading>

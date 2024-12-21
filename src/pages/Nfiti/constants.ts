@@ -166,7 +166,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       reason: "엔플라잉을 좋아하는 이유?",
       reasonText: "멤버들의 진심이 내 마음을 울려서!",
       keyPoints: {
-        title: "감동 가득 따뜻한 코멘트와 응원 메시지!",
+        title: "감동 가득 따뜻한 코멘트와\n" + "응원 메시지!",
         description: [
           "무대 위 작은 순간에도 멤버들의 진심을 느끼며 깊은 감동을 받는 타입이에요.",
           "엔피아들과 감정을 나누고 공감하며 소통하는 데서 큰 기쁨을 찾습니다.",
@@ -249,9 +249,9 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
     imageUrl: "/image/nfiti/result/ENF.png",
     details: {
       reason: "엔플라잉을 좋아하는 이유?",
-      reasonText: "그들의 무대가 내 마음속 불꽃을 일으켜!",
+      reasonText: "그들의 무대가\n" + "내 마음속 불꽃을 일으켜!",
       keyPoints: {
-        title: "진심 가득한 팬레터와 감동적인 한 마디!",
+        title: "진심 가득한\n" + "팬레터와 감동적인 한 마디!",
         description: [
           "공연에서 느낀 감정을 가장 소중히 여기며, 그 감동을 팬들과 나누는 것을 즐깁니다. ",
           "공연에 몰입해 멤버들의 감정에 깊이 공감하고, 그 순간의 여운을 나누며 뜨거운 응원을 이끌어내죠. ",
@@ -261,7 +261,8 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       dayPlan: {
         title:
           "오늘 공연, 나에게 큰 영감을 줬어.\n" +
-          "이 감동을 다른 엔피아들과 나누고 싶어!",
+          "이 감동을\n" +
+          "다른 엔피아들과 함께 나누고 싶어!",
         description: [
           {
             title: "열정적이고 공감력 넘치는 팬",
@@ -292,9 +293,9 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
     imageUrl: "/image/nfiti/result/IST.png",
     details: {
       reason: "엔플라잉을 좋아하는 이유?",
-      reasonText: "그들의 무대가 진짜 가치 있고 멋지거든.",
+      reasonText: "그들의 무대가\n" + "진짜 가치 있고 멋지거든.",
       keyPoints: {
-        title: "꼼꼼한 덕질 일지와 공연 분석 노트!",
+        title: "꼼꼼한 덕질 일지와\n" + "공연 분석 노트!",
         description: [
           "외부에 드러나는 활동은 적지만, 마음속엔 깊은 팬심이 자리 잡고 있어요.",
           "엔플라잉의 활동에 대한 세부적인 정보를 수집하고, 이를 차분하게 분석하며 점차 더 큰 애정을 쌓아가죠.",
@@ -336,7 +337,7 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
     imageUrl: "/image/nfiti/result/ISF.png",
     details: {
       reason: "엔플라잉을 좋아하는 이유?",
-      reasonText: "그들의 무대가 내게 소소한 행복이야.",
+      reasonText: "그들의 무대가\n" + "내게 소소한 행복이야.",
       keyPoints: {
         title: "그날의 추억이 담긴 사진첩과 굿즈!",
         description: [
@@ -381,9 +382,9 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
     imageUrl: "/image/nfiti/result/INT.png",
     details: {
       reason: "엔플라잉을 좋아하는 이유?",
-      reasonText: "그들의 무대가 나를 깊게 생각하게 만들거든.",
+      reasonText: "그들의 무대가\n" + "나를 깊게 생각하게 해.",
       keyPoints: {
-        title: "나만의 엔플라잉 플리와 가사 분석 노트!",
+        title: "나만의 엔플라잉 플리와\n" + "가사 분석 노트!",
         description: [
           "단순한 감상을 넘어서, 음악과 스토리에서 의미를 찾아내는데 진심인 타입!",
           "공연을 본 후에는 그 경험을 자신만의 방식으로 해석하며, 엔플라잉의 음악적 진화에 대해 깊이 탐구합니다.",
@@ -393,7 +394,8 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
       dayPlan: {
         title:
           "공연의 여운을 깊이 되새기며, \n" +
-          "그 순간을 다시 한번 마음속에 담는게 좋아.",
+          "그 순간을 다시 한번\n" +
+          "마음속에 담는게 좋아.",
         description: [
           {
             title: "논리적이고 분석적인 팬",
@@ -425,9 +427,9 @@ export const RESULT_DESCRIPTIONS: { [key: string]: TestResult } = {
     imageUrl: "/image/nfiti/result/INF.png",
     details: {
       reason: "엔플라잉을 좋아하는 이유?",
-      reasonText: "그들의 무대가 마음속 깊이 울림을 주거든.",
+      reasonText: "그들의 무대가\n" + "마음속 깊이 울림을 주거든.",
       keyPoints: {
-        title: "진심 어린 응원의 메시지와 공감 가득한 후기!",
+        title: "진심 어린 응원의 메시지와\n" + "공감 가득한 후기!",
         description: [
           "엔플라잉의 무대에서 느낀 깊은 감동을 마음 깊이 오래도록 간직하는 타입이에요.",
           "멤버들의 작은 행동과 사소한 표현에서도 의미를 발견하며, 그 순간을 공유할 때 더욱 큰 행복을 느낍니다.",
