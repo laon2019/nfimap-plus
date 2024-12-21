@@ -14,7 +14,7 @@ import ShareModal from "./components/ShareModal";
 import { FaInstagram } from "react-icons/fa";
 
 interface TestResultDetails {
-  reason: string;
+  reason: string; 
   reasonText: string;
   keyPoints: {
     title: string;
@@ -135,7 +135,8 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
     }
   };
 
-  const formatDetails = (result: any) => {
+  const formatDetails = (result: TestResult | null | undefined) => {
+    if (!result) return "";
     return `
 
 ${result.details.reason}
@@ -145,6 +146,10 @@ ${result.details.hashtags}`;
   }
   
   const formattedResult = formatDetails(testResult);
+
+  if (!testResult) {
+    return null;
+  }
 
   return (
     <Box fontFamily='"nanumfont", sans-serif'>
