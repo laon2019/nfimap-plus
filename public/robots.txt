@@ -1,3 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: 
+
+# Allow access to ads.txt
+Allow: /ads.txt
