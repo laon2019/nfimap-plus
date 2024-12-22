@@ -19,7 +19,7 @@ interface ShareModalProps {
   shareUrl?: string;
   shareTitle?: string;
   shareDescription?: string;
-  canvasRef?: RefObject<HTMLCanvasElement>; // Update type for canvas reference
+  canvasRef?: RefObject<HTMLCanvasElement>;
 }
 
 declare global {
@@ -39,7 +39,6 @@ const ShareModal: React.FC<ShareModalProps> = ({
   const toast = useToast();
 
   useEffect(() => {
-    // 카카오톡 SDK 초기화
     const initKakaoSDK = () => {
       if (window.Kakao && !window.Kakao.isInitialized()) {
         window.Kakao.cleanup();
@@ -47,11 +46,9 @@ const ShareModal: React.FC<ShareModalProps> = ({
       }
     };
 
-    // SDK 초기화 및 로드 체크
     if (window.Kakao) {
       initKakaoSDK();
     } else {
-      // Kakao SDK 동적 로드
       const script = document.createElement("script");
       script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js";
       script.async = true;
@@ -59,7 +56,6 @@ const ShareModal: React.FC<ShareModalProps> = ({
       document.head.appendChild(script);
     }
 
-    // 컴포넌트 언마운트 시 스크립트 제거
     return () => {
       const scripts = document.head.getElementsByTagName("script");
       for (let i = 0; i < scripts.length; i++) {
@@ -110,7 +106,6 @@ const ShareModal: React.FC<ShareModalProps> = ({
     }
 
     try {
-      // 캔버스 이미지가 있는 경우
       if (canvasRef?.current) {
         canvasRef.current.toBlob(function (blob) {
           if (blob) {
@@ -126,18 +121,14 @@ const ShareModal: React.FC<ShareModalProps> = ({
               file: dataTransfer.files,
             })
               .then((response: any) => {
-                window.Kakao.Share.sendDefault({
-                  objectType: "feed",
-                  content: {
+                window.Kakao.Share.sendCustom({
+                  templateId: 115327,
+                  templateArgs: {
                     title: shareTitle,
                     description: shareDescription,
-                    imageUrl: response.infos.original.url,
-                    link: {
-                      webUrl: shareUrl,
-                      mobileWebUrl: shareUrl,
-                    },
+                    image: response.infos.original.url,
+                    shareUrl: shareUrl,
                   },
-                  buttonTitle: "",
                 });
               })
               .catch((error: any) => {
@@ -156,13 +147,12 @@ const ShareModal: React.FC<ShareModalProps> = ({
           }
         }, "image/png");
       } else {
-        // 캔버스 없는 경우 텍스트 타입으로 공유
-        window.Kakao.Share.sendDefault({
-          objectType: "text",
-          text: `${shareTitle}\n${shareDescription}`,
-          link: {
-            webUrl: shareUrl,
-            mobileWebUrl: shareUrl,
+        window.Kakao.Share.sendCustom({
+          templateId: 115327,
+          templateArgs: {
+            title: shareTitle,
+            description: shareDescription,
+            shareUrl: shareUrl,
           },
         });
       }
