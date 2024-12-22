@@ -107,7 +107,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
 
         {/* Hashtags Section */}
         <Flex wrap="wrap" justify="center" gap={3} mb={8}>
-          {testResult.details.hashtags.split(",").map((tag, idx) => (
+          {testResult.details.hashtags.split(" ").map((tag, idx) => (
             <motion.div
               key={idx}
               variants={itemVariants}
