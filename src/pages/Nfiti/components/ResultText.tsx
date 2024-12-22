@@ -326,7 +326,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                       <Heading 
                         size="sm" 
                         color="green.600"
-                        fontWeight="medium"
+                        fontWeight="bold"
                       >
                         🌟 {plan.title}
                       </Heading>
