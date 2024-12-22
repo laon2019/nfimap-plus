@@ -248,43 +248,6 @@ ${result.details.hashtags}`;
               </Flex>
 
               <ResultText testResult={testResult} />
-              <Flex
-                alignItems="center"
-                justifyContent="center"
-                mt={4}
-                p={3}
-                borderRadius="md"
-              >
-                <Link
-                  href="https://www.instagram.com/HOYEYE92"
-                  isExternal
-                  display="flex"
-                  alignItems="center"
-                  gap={2}
-                  _hover={{ textDecoration: "none" }}
-                >
-                  <Text
-                    fontFamily='"UhBeeSe_hyun", serif'
-                    fontSize="lg"
-                    fontWeight="800"
-                    color="purple"
-                    _hover={{
-                      color: "purple.500",
-                    }}
-                  >
-                    HOYEYE92
-                  </Text>
-                  <Flex
-                    alignItems="center"
-                    justifyContent="center"
-                    boxSize="30px"
-                    bgGradient="linear(to-br, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)"
-                    borderRadius="full"
-                  >
-                    <FaInstagram color="white" size="20px" />
-                  </Flex>
-                </Link>
-              </Flex>
               <Box
                 position="relative"
                 w="100%"
@@ -304,6 +267,43 @@ ${result.details.hashtags}`;
                   loading="eager"
                 />
               </Box>
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                p={3}
+                borderRadius="md"
+              >
+                <Link
+                  href="https://www.instagram.com/HOYEYE92"
+                  isExternal
+                  display="flex"
+                  alignItems="center"
+                  gap={2}
+                  _hover={{ textDecoration: "none" }}
+                >
+                  <Text
+                    fontFamily='"UhBeeSe_hyun", serif'
+                    fontSize="2xl"
+                    fontWeight="800"
+                    color="purple"
+                    _hover={{
+                      color: "purple.500",
+                    }}
+                  >
+                    HOYEYE92
+                  </Text>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="center"
+                    boxSize="30px"
+                    bgGradient="linear(to-br, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)"
+                    borderRadius="full"
+                  >
+                    <FaInstagram color="white" size="20px" />
+                  </Flex>
+                </Link>
+              </Flex>
+              
             </Stack>
           )}
         </Flex>

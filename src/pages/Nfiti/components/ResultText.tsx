@@ -335,7 +335,6 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                       color={textColor}
                       whiteSpace="pre-line"
                       fontSize="md"
-                      pl={7}
                     >
                       {plan.content}
                     </Text>
