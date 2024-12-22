@@ -137,6 +137,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
                       mobileWebUrl: shareUrl,
                     },
                   },
+                  buttonTitle: "",
                 });
               })
               .catch((error: any) => {
