@@ -15,8 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { motion, isValidMotionProp, Variants } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { FaLightbulb, FaStar } from "react-icons/fa";
-
+import { FaLightbulb } from "react-icons/fa";
+import { TbMoonStars } from "react-icons/tb";
 // Proper typing for motion components
 const ChakraBox = chakra(Box, {
   shouldForwardProp: (prop) =>
@@ -276,20 +276,18 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
             }}
           >
             <VStack spacing={5}>
+
+              <Heading size="lg" color="orange.500" textAlign="center">
+              🔮 비장의 무기 🔮
+              </Heading>
               <Heading size="md" color="orange.500" textAlign="center">
                 {testResult.details.keyPoints.title}
               </Heading>
               <VStack spacing={3} align="stretch" width="100%">
                 {testResult.details.keyPoints.description.map((point, idx) => (
                   <HStack spacing={3} alignItems="flex-start">
-                    <Icon
-                      as={FaLightbulb}
-                      color="yellow.400"
-                      boxSize={4}
-                      mt={1}
-                    />
                     <Text color={textColor} fontSize="md">
-                      {point}
+                    💡 {point}
                     </Text>
                   </HStack>
                 ))}
@@ -325,14 +323,12 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                 {testResult.details.dayPlan.description.map((plan, idx) => (
                   <VStack align="stretch" spacing={2}>
                     <HStack spacing={3}>
-                      <Icon as={FaStar} color="green.400" boxSize={4} />
                       <Heading 
                         size="sm" 
                         color="green.600"
-                        fontStyle="italic"
                         fontWeight="medium"
                       >
-                        {plan.title}
+                        🌟 {plan.title}
                       </Heading>
                     </HStack>
                     <Text
