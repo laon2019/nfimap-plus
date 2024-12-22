@@ -40,7 +40,7 @@ const SnowfallEffect = () => {
       left: Math.random() * 100,
       animationDuration: 5 + Math.random() * 10,
       opacity: 0.4 + Math.random() * 0.4,
-      size: 3 + Math.random() * 7
+      size: 3 + Math.random() * 7,
     });
 
     const generateSnowflakes = () => {
@@ -180,48 +180,54 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
           {/* Hashtags Section */}
           <Flex direction="column" align="center" gap={3} mb={8}>
             <Flex justify="center" gap={3}>
-              {testResult.details.hashtags.split(" ").slice(0, 3).map((tag, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <HStack
-                    bg={hashtagBg}
-                    px={4}
-                    py={2}
-                    borderRadius="full"
-                    shadow="md"
+              {testResult.details.hashtags
+                .split(" ")
+                .slice(0, 3)
+                .map((tag, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <Text fontSize="sm" fontWeight="bold">
-                      {tag.trim()}
-                    </Text>
-                  </HStack>
-                </motion.div>
-              ))}
+                    <HStack
+                      bg={hashtagBg}
+                      px={4}
+                      py={2}
+                      borderRadius="full"
+                      shadow="md"
+                    >
+                      <Text fontSize="sm" fontWeight="bold">
+                        {tag.trim()}
+                      </Text>
+                    </HStack>
+                  </motion.div>
+                ))}
             </Flex>
             <Flex justify="center" gap={3}>
-              {testResult.details.hashtags.split(" ").slice(3).map((tag, idx) => (
-                <motion.div
-                  key={idx + 3}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <HStack
-                    bg={hashtagBg}
-                    px={4}
-                    py={2}
-                    borderRadius="full"
-                    shadow="md"
+              {testResult.details.hashtags
+                .split(" ")
+                .slice(3)
+                .map((tag, idx) => (
+                  <motion.div
+                    key={idx + 3}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <Text fontSize="sm" fontWeight="bold">
-                      {tag.trim()}
-                    </Text>
-                  </HStack>
-                </motion.div>
-              ))}
+                    <HStack
+                      bg={hashtagBg}
+                      px={4}
+                      py={2}
+                      borderRadius="full"
+                      shadow="md"
+                    >
+                      <Text fontSize="sm" fontWeight="bold">
+                        {tag.trim()}
+                      </Text>
+                    </HStack>
+                  </motion.div>
+                ))}
             </Flex>
           </Flex>
 
@@ -230,23 +236,25 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
             variants={itemVariants}
             style={{
               padding: "1.5rem",
-              borderRadius: "1.25rem", 
+              borderRadius: "1.25rem",
               boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
               marginBottom: "1.5rem",
               background: cardBg,
-              width: "100%"
+              width: "100%",
             }}
             whileHover={{ scale: 1.01 }}
             transition={{ duration: 0.2 }}
           >
             <VStack spacing={4}>
               <Heading size="md" color={headingColor}>
-                <Text fontSize="xl" textAlign="center">{testResult.details.reason}</Text>
+                <Text fontSize="xl" textAlign="center">
+                  {testResult.details.reason}
+                </Text>
               </Heading>
-              <Text 
-                fontSize="md" 
-                textAlign="center" 
-                color={textColor} 
+              <Text
+                fontSize="md"
+                textAlign="center"
+                color={textColor}
                 lineHeight="1.6"
                 px={2}
               >
@@ -264,7 +272,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
               borderRadius: "1.25rem",
               boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
               marginBottom: "1.5rem",
-              width: "100%"
+              width: "100%",
             }}
           >
             <VStack spacing={5}>
@@ -273,18 +281,17 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
               </Heading>
               <VStack spacing={3} align="stretch" width="100%">
                 {testResult.details.keyPoints.description.map((point, idx) => (
-                  <Box 
-                    key={idx} 
-                    p={4} 
-                    bg={keyPointsItemBg} 
-                    borderRadius="lg" 
-                    shadow="sm"
-                  >
-                    <HStack spacing={3} alignItems="flex-start">
-                      <Icon as={FaLightbulb} color="yellow.400" boxSize={4} mt={1} />
-                      <Text color={textColor} fontSize="md">{point}</Text>
-                    </HStack>
-                  </Box>
+                  <HStack spacing={3} alignItems="flex-start">
+                    <Icon
+                      as={FaLightbulb}
+                      color="yellow.400"
+                      boxSize={4}
+                      mt={1}
+                    />
+                    <Text color={textColor} fontSize="md">
+                      {point}
+                    </Text>
+                  </HStack>
                 ))}
               </VStack>
             </VStack>
@@ -298,7 +305,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
               padding: "1.5rem",
               borderRadius: "1.25rem",
               boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-              width: "100%"
+              width: "100%",
             }}
           >
             <VStack spacing={6}>
@@ -308,35 +315,35 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                 textAlign="center"
                 whiteSpace="pre-line"
                 px={2}
+                fontWeight="extrabold"
+                textTransform="uppercase"
+                letterSpacing="wide"
               >
                 {testResult.details.dayPlan.title}
               </Heading>
               <VStack align="stretch" width="100%" spacing={4}>
                 {testResult.details.dayPlan.description.map((plan, idx) => (
-                  <Box 
-                    key={idx} 
-                    p={4} 
-                    bg={dayPlanItemBg} 
-                    borderRadius="lg" 
-                    shadow="sm"
-                  >
-                    <VStack align="stretch" spacing={2}>
-                      <HStack spacing={3}>
-                        <Icon as={FaStar} color="green.400" boxSize={4} />
-                        <Heading size="sm" color="green.600">
-                          {plan.title}
-                        </Heading>
-                      </HStack>
-                      <Text 
-                        color={textColor} 
-                        whiteSpace="pre-line" 
-                        fontSize="md" 
-                        pl={7}
+                  <VStack align="stretch" spacing={2}>
+                    <HStack spacing={3}>
+                      <Icon as={FaStar} color="green.400" boxSize={4} />
+                      <Heading 
+                        size="sm" 
+                        color="green.600"
+                        fontStyle="italic"
+                        fontWeight="medium"
                       >
-                        {plan.content}
-                      </Text>
-                    </VStack>
-                  </Box>
+                        {plan.title}
+                      </Heading>
+                    </HStack>
+                    <Text
+                      color={textColor}
+                      whiteSpace="pre-line"
+                      fontSize="md"
+                      pl={7}
+                    >
+                      {plan.content}
+                    </Text>
+                  </VStack>
                 ))}
               </VStack>
             </VStack>
