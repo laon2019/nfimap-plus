@@ -14,7 +14,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { motion, isValidMotionProp, Variants } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaLightbulb, FaStar } from "react-icons/fa";
 
 // Proper typing for motion components
@@ -22,6 +22,76 @@ const ChakraBox = chakra(Box, {
   shouldForwardProp: (prop) =>
     isValidMotionProp(prop) || shouldForwardProp(prop),
 });
+
+interface Snowflake {
+  id: number;
+  left: number;
+  animationDuration: number;
+  opacity: number;
+  size: number;
+}
+
+const SnowfallEffect = () => {
+  const [snowflakes, setSnowflakes] = useState<Snowflake[]>([]);
+
+  useEffect(() => {
+    const createSnowflake = (): Snowflake => ({
+      id: Math.random(),
+      left: Math.random() * 100,
+      animationDuration: 5 + Math.random() * 10,
+      opacity: 0.4 + Math.random() * 0.4,
+      size: 3 + Math.random() * 7
+    });
+
+    const generateSnowflakes = () => {
+      const newSnowflakes = Array.from({ length: 50 }, () => createSnowflake());
+      setSnowflakes(newSnowflakes);
+    };
+
+    generateSnowflakes();
+    const interval = setInterval(generateSnowflakes, 15000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Box
+      position="fixed"
+      top={0}
+      left={0}
+      right={0}
+      bottom={0}
+      pointerEvents="none"
+      zIndex={10}
+      overflow="hidden"
+    >
+      {snowflakes.map((snowflake) => (
+        <Box
+          key={snowflake.id}
+          position="absolute"
+          left={`${snowflake.left}%`}
+          top="-10px"
+          width={`${snowflake.size}px`}
+          height={`${snowflake.size}px`}
+          backgroundColor="white"
+          borderRadius="50%"
+          opacity={snowflake.opacity}
+          animation={`fall ${snowflake.animationDuration}s linear infinite`}
+          sx={{
+            "@keyframes fall": {
+              "0%": {
+                transform: "translateY(-10px) rotate(0deg)",
+              },
+              "100%": {
+                transform: `translateY(100vh) rotate(360deg)`,
+              },
+            },
+          }}
+        />
+      ))}
+    </Box>
+  );
+};
 
 interface TestResult {
   title: string;
@@ -80,173 +150,200 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
   };
 
   return (
-    <Container maxW="4xl" py={10}>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Title Section */}
-        <VStack spacing={6} mb={10}>
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Heading
-              size="2xl"
-              bgGradient="linear(to-r, blue.400, purple.500)"
-              bgClip="text"
-              textAlign="center"
-              mb={4}
-            >
-              {testResult.title}
-            </Heading>
-          </motion.div>
-        </VStack>
-
-        {/* Hashtags Section */}
-        <Flex wrap="wrap" justify="center" gap={3} mb={8}>
-          {testResult.details.hashtags.split(" ").map((tag, idx) => (
+    <Box position="relative">
+      <SnowfallEffect />
+      <Container maxW="4xl" py={10}>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Title Section */}
+          <VStack spacing={6} mb={10}>
             <motion.div
-              key={idx}
-              variants={itemVariants}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
-              <HStack
-                bg={hashtagBg}
-                px={4}
-                py={2}
-                borderRadius="full"
-                shadow="md"
+              <Heading
+                size="2xl"
+                bgGradient="linear(to-r, blue.400, purple.500)"
+                bgClip="text"
+                textAlign="center"
+                mb={4}
               >
-                <Text fontSize="sm" fontWeight="bold">
-                  {tag.trim()}
-                </Text>
-              </HStack>
+                {testResult.title}
+              </Heading>
             </motion.div>
-          ))}
-        </Flex>
-
-        {/* Reason Section */}
-        <motion.div
-          variants={itemVariants}
-          style={{
-            padding: "1.5rem",
-            borderRadius: "1.25rem", 
-            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-            marginBottom: "1.5rem",
-            background: cardBg,
-            width: "100%"
-          }}
-          whileHover={{ scale: 1.01 }}
-          transition={{ duration: 0.2 }}
-        >
-          <VStack spacing={4}>
-            <Heading size="md" color={headingColor}>
-              <Text fontSize="xl" textAlign="center">{testResult.details.reason}</Text>
-            </Heading>
-            <Text 
-              fontSize="md" 
-              textAlign="center" 
-              color={textColor} 
-              lineHeight="1.6"
-              px={2}
-            >
-              {testResult.details.reasonText}
-            </Text>
           </VStack>
-        </motion.div>
 
-        {/* Key Points Section */}
-        <motion.div
-          variants={itemVariants}
-          style={{
-            background: keyPointsBg,
-            padding: "1.5rem",
-            borderRadius: "1.25rem",
-            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-            marginBottom: "1.5rem",
-            width: "100%"
-          }}
-        >
-          <VStack spacing={5}>
-            <Heading size="md" color="orange.500" textAlign="center">
-              {testResult.details.keyPoints.title}
-            </Heading>
-            <VStack spacing={3} align="stretch" width="100%">
-              {testResult.details.keyPoints.description.map((point, idx) => (
-                <Box 
-                  key={idx} 
-                  p={4} 
-                  bg={keyPointsItemBg} 
-                  borderRadius="lg" 
-                  shadow="sm"
+          {/* Hashtags Section */}
+          <Flex direction="column" align="center" gap={3} mb={8}>
+            <Flex justify="center" gap={3}>
+              {testResult.details.hashtags.split(" ").slice(0, 3).map((tag, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <HStack spacing={3} alignItems="flex-start">
-                    <Icon as={FaLightbulb} color="yellow.400" boxSize={4} mt={1} />
-                    <Text color={textColor} fontSize="md">{point}</Text>
-                  </HStack>
-                </Box>
-              ))}
-            </VStack>
-          </VStack>
-        </motion.div>
-
-        {/* Day Plan Section */}
-        <motion.div
-          variants={itemVariants}
-          style={{
-            background: dayPlanBg,
-            padding: "1.5rem",
-            borderRadius: "1.25rem",
-            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-            width: "100%"
-          }}
-        >
-          <VStack spacing={6}>
-            <Heading
-              size="md"
-              color="green.600"
-              textAlign="center"
-              whiteSpace="pre-line"
-              px={2}
-            >
-              {testResult.details.dayPlan.title}
-            </Heading>
-            <VStack align="stretch" width="100%" spacing={4}>
-              {testResult.details.dayPlan.description.map((plan, idx) => (
-                <Box 
-                  key={idx} 
-                  p={4} 
-                  bg={dayPlanItemBg} 
-                  borderRadius="lg" 
-                  shadow="sm"
-                >
-                  <VStack align="stretch" spacing={2}>
-                    <HStack spacing={3}>
-                      <Icon as={FaStar} color="green.400" boxSize={4} />
-                      <Heading size="sm" color="green.600">
-                        {plan.title}
-                      </Heading>
-                    </HStack>
-                    <Text 
-                      color={textColor} 
-                      whiteSpace="pre-line" 
-                      fontSize="md" 
-                      pl={7}
-                    >
-                      {plan.content}
+                  <HStack
+                    bg={hashtagBg}
+                    px={4}
+                    py={2}
+                    borderRadius="full"
+                    shadow="md"
+                  >
+                    <Text fontSize="sm" fontWeight="bold">
+                      {tag.trim()}
                     </Text>
-                  </VStack>
-                </Box>
+                  </HStack>
+                </motion.div>
               ))}
+            </Flex>
+            <Flex justify="center" gap={3}>
+              {testResult.details.hashtags.split(" ").slice(3).map((tag, idx) => (
+                <motion.div
+                  key={idx + 3}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <HStack
+                    bg={hashtagBg}
+                    px={4}
+                    py={2}
+                    borderRadius="full"
+                    shadow="md"
+                  >
+                    <Text fontSize="sm" fontWeight="bold">
+                      {tag.trim()}
+                    </Text>
+                  </HStack>
+                </motion.div>
+              ))}
+            </Flex>
+          </Flex>
+
+          {/* Reason Section */}
+          <motion.div
+            variants={itemVariants}
+            style={{
+              padding: "1.5rem",
+              borderRadius: "1.25rem", 
+              boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+              marginBottom: "1.5rem",
+              background: cardBg,
+              width: "100%"
+            }}
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.2 }}
+          >
+            <VStack spacing={4}>
+              <Heading size="md" color={headingColor}>
+                <Text fontSize="xl" textAlign="center">{testResult.details.reason}</Text>
+              </Heading>
+              <Text 
+                fontSize="md" 
+                textAlign="center" 
+                color={textColor} 
+                lineHeight="1.6"
+                px={2}
+              >
+                {testResult.details.reasonText}
+              </Text>
             </VStack>
-          </VStack>
+          </motion.div>
+
+          {/* Key Points Section */}
+          <motion.div
+            variants={itemVariants}
+            style={{
+              background: keyPointsBg,
+              padding: "1.5rem",
+              borderRadius: "1.25rem",
+              boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+              marginBottom: "1.5rem",
+              width: "100%"
+            }}
+          >
+            <VStack spacing={5}>
+              <Heading size="md" color="orange.500" textAlign="center">
+                {testResult.details.keyPoints.title}
+              </Heading>
+              <VStack spacing={3} align="stretch" width="100%">
+                {testResult.details.keyPoints.description.map((point, idx) => (
+                  <Box 
+                    key={idx} 
+                    p={4} 
+                    bg={keyPointsItemBg} 
+                    borderRadius="lg" 
+                    shadow="sm"
+                  >
+                    <HStack spacing={3} alignItems="flex-start">
+                      <Icon as={FaLightbulb} color="yellow.400" boxSize={4} mt={1} />
+                      <Text color={textColor} fontSize="md">{point}</Text>
+                    </HStack>
+                  </Box>
+                ))}
+              </VStack>
+            </VStack>
+          </motion.div>
+
+          {/* Day Plan Section */}
+          <motion.div
+            variants={itemVariants}
+            style={{
+              background: dayPlanBg,
+              padding: "1.5rem",
+              borderRadius: "1.25rem",
+              boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+              width: "100%"
+            }}
+          >
+            <VStack spacing={6}>
+              <Heading
+                size="md"
+                color="green.600"
+                textAlign="center"
+                whiteSpace="pre-line"
+                px={2}
+              >
+                {testResult.details.dayPlan.title}
+              </Heading>
+              <VStack align="stretch" width="100%" spacing={4}>
+                {testResult.details.dayPlan.description.map((plan, idx) => (
+                  <Box 
+                    key={idx} 
+                    p={4} 
+                    bg={dayPlanItemBg} 
+                    borderRadius="lg" 
+                    shadow="sm"
+                  >
+                    <VStack align="stretch" spacing={2}>
+                      <HStack spacing={3}>
+                        <Icon as={FaStar} color="green.400" boxSize={4} />
+                        <Heading size="sm" color="green.600">
+                          {plan.title}
+                        </Heading>
+                      </HStack>
+                      <Text 
+                        color={textColor} 
+                        whiteSpace="pre-line" 
+                        fontSize="md" 
+                        pl={7}
+                      >
+                        {plan.content}
+                      </Text>
+                    </VStack>
+                  </Box>
+                ))}
+              </VStack>
+            </VStack>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
