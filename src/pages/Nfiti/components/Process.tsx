@@ -84,7 +84,7 @@ const Process = ({
   }, []);
 
   return (
-    <Box height="calc(100vh - 68px)" p={2}>
+    <Box height="calc(100svh - 68px)" p={2}>
       {showLoading && (
             <Flex
               ref={loadingRef}

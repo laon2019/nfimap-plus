@@ -78,7 +78,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
 
   return (
     <Flex
-      h="calc(100vh - 68px)"
+      h="calc(100svh - 68px)"
       flexDirection="column"
       justifyContent="space-between"
       alignItems="center"

@@ -12,20 +12,20 @@ const Layout = ({ children }: LayoutProps) => {
   const bg = useRecoilValue(bgColorState);
   return (
     <Box 
-      height="100dvh"
+      height="100svh"
       display="flex" 
       justifyContent="center" 
       backgroundColor={bg}
     >
       <Container 
         maxW="480px"
-        height="100dvh"
+        height="100svh"
         p={0}
         backgroundColor="white"
         boxShadow="lg"
       >
         <Header />
-        <main style={{ minHeight: "calc(100dvh - 68px)"}}>{children}</main>
+        <main style={{ minHeight: "calc(100svh - 68px)"}}>{children}</main>
       </Container>
     </Box>
   );
