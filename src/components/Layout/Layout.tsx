@@ -12,7 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
   const bg = useRecoilValue(bgColorState);
   return (
     <Box 
-      height="100%" 
+      height="100dvh"
       display="flex" 
       justifyContent="center" 
       backgroundColor={bg}
