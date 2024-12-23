@@ -7,7 +7,7 @@ const NotFoundPage = () => {
       display="flex" 
       justifyContent="center" 
       alignItems="center" 
-      minH="calc(100vh - 68px)"
+      minH="calc(100dvh - 68px)"
       bg="blue.50"
     >
       <VStack spacing={6}>

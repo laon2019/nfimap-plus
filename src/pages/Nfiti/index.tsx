@@ -51,7 +51,7 @@ const Nfiti = ({ onStartTest }: NfitiProps) => {
         )}
       </Flex>
       <Flex
-        h="calc(100vh - 368px)"
+        h="calc(100dvh - 368px)"
         alignItems="center"
         justifyContent="center"
         borderRadius="md"
