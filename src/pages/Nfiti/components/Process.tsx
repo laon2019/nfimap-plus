@@ -201,7 +201,7 @@ const Process = ({
               fontSize="16px"
               color="black"
               fontWeight="bold"
-              fontFamily='"nanumfont", sans-serif'
+              fontFamily="'Noto Sans KR', sans-serif"
               textAlign="center"
               whiteSpace="pre-line"
             >
@@ -234,7 +234,7 @@ const Process = ({
               fontSize="16px"
               color="black"
               fontWeight="bold"
-              fontFamily='"nanumfont", sans-serif'
+              fontFamily="'Noto Sans KR', sans-serif"
               textAlign="center"
               whiteSpace="pre-line"
             >

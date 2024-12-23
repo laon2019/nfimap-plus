@@ -17,6 +17,7 @@ import { motion, isValidMotionProp, Variants } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { FaLightbulb } from "react-icons/fa";
 import { TbMoonStars } from "react-icons/tb";
+
 // Proper typing for motion components
 const ChakraBox = chakra(Box, {
   shouldForwardProp: (prop) =>
@@ -127,12 +128,10 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
     "rgba(251, 211, 141, 0.1)",
     "rgba(66, 30, 0, 0.9)"
   );
-  const keyPointsItemBg = useColorModeValue("white", "orange.800");
   const dayPlanBg = useColorModeValue(
     "rgba(154, 230, 180, 0.1)",
     "rgba(0, 66, 37, 0.9)"
   );
-  const dayPlanItemBg = useColorModeValue("white", "green.800");
 
   // Animation variants
   const containerVariants: Variants = {
@@ -150,7 +149,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
   };
 
   return (
-    <Box position="relative">
+    <Box position="relative" fontFamily="'Noto Sans KR', sans-serif">
       <SnowfallEffect />
       <Container maxW="4xl" py={10}>
         <motion.div
@@ -171,6 +170,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                 bgClip="text"
                 textAlign="center"
                 mb={4}
+                fontFamily="'Noto Sans KR', sans-serif"
               >
                 {testResult.title}
               </Heading>
@@ -197,7 +197,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                       borderRadius="full"
                       shadow="md"
                     >
-                      <Text fontSize="sm" fontWeight="bold">
+                      <Text fontSize="sm" fontWeight="bold" fontFamily="'Noto Sans KR', sans-serif">
                         {tag.trim()}
                       </Text>
                     </HStack>
@@ -222,7 +222,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                       borderRadius="full"
                       shadow="md"
                     >
-                      <Text fontSize="sm" fontWeight="bold">
+                      <Text fontSize="sm" fontWeight="bold" fontFamily="'Noto Sans KR', sans-serif">
                         {tag.trim()}
                       </Text>
                     </HStack>
@@ -246,7 +246,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
             transition={{ duration: 0.2 }}
           >
             <VStack spacing={4}>
-              <Heading size="md" color={headingColor}>
+              <Heading size="md" color={headingColor} fontFamily="'Noto Sans KR', sans-serif">
                 <Text fontSize="xl" textAlign="center">
                   {testResult.details.reason}
                 </Text>
@@ -257,6 +257,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                 color={textColor}
                 lineHeight="1.6"
                 px={2}
+                fontFamily="'Noto Sans KR', sans-serif"
               >
                 {testResult.details.reasonText}
               </Text>
@@ -276,18 +277,17 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
             }}
           >
             <VStack spacing={5}>
-
-              <Heading size="lg" color="orange.500" textAlign="center">
-              🔮 비장의 무기 🔮
+              <Heading size="lg" color="orange.500" textAlign="center" fontFamily="'Noto Sans KR', sans-serif">
+                🔮 비장의 무기 🔮
               </Heading>
-              <Heading size="md" color="orange.500" textAlign="center">
+              <Heading size="md" color="orange.500" textAlign="center" fontFamily="'Noto Sans KR', sans-serif">
                 {testResult.details.keyPoints.title}
               </Heading>
               <VStack spacing={3} align="stretch" width="100%">
                 {testResult.details.keyPoints.description.map((point, idx) => (
                   <HStack spacing={3} alignItems="flex-start">
-                    <Text color={textColor} fontSize="md">
-                    💡 {point}
+                    <Text color={textColor} fontSize="md" fontFamily="'Noto Sans KR', sans-serif">
+                      💡 {point}
                     </Text>
                   </HStack>
                 ))}
@@ -316,6 +316,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                 fontWeight="extrabold"
                 textTransform="uppercase"
                 letterSpacing="wide"
+                fontFamily="'Noto Sans KR', sans-serif"
               >
                 {testResult.details.dayPlan.title}
               </Heading>
@@ -327,6 +328,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                         size="sm" 
                         color="green.600"
                         fontWeight="bold"
+                        fontFamily="'Noto Sans KR', sans-serif"
                       >
                         🌟 {plan.title}
                       </Heading>
@@ -335,6 +337,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ testResult }) => {
                       color={textColor}
                       whiteSpace="pre-line"
                       fontSize="md"
+                      fontFamily="'Noto Sans KR', sans-serif"
                     >
                       {plan.content}
                     </Text>

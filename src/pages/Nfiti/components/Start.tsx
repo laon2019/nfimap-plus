@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Box, Flex, Image, Button } from "@chakra-ui/react";
-import { convertToWebP } from "../../utils/utils";
+import { convertToWebP } from "../../../utils/utils";
 
 interface NfitiProps {
   onStartTest: () => void;

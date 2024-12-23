@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
-import Nfiti from ".";
-import Result from "./Result";
+import Start from "./components/Start";
+import Result from "./components/Result";
 import NameInput from "./components/NameInput";
 import Process from "./components/Process";
 import { QUESTIONS, RESULT_DESCRIPTIONS, TestResult } from "./constants";
@@ -33,10 +33,14 @@ const NfititTestFlow = () => {
 
     if (currentQuestionIndex < QUESTIONS.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
-    } else {
-      calculateResult();
     }
   };
+
+  useEffect(() => {
+  if (Object.keys(answers).length === QUESTIONS.length) {
+    calculateResult();
+  }
+}, [answers]);
 
   const calculateResult = () => {
     const group1 = [1, 4, 6]; // true면 E, false면 I
@@ -49,13 +53,10 @@ const NfititTestFlow = () => {
     const eOrI = countTrueInGroup(group1) > group1.length / 2 ? "E" : "I";
     const sOrN = countTrueInGroup(group2) > group2.length / 2 ? "S" : "N";
     const fOrT = countTrueInGroup(group3) > group3.length / 2 ? "T" : "F";
-
     const resultCode = `${eOrI}${sOrN}${fOrT}` as keyof typeof RESULT_DESCRIPTIONS;
-
     setTestResult(RESULT_DESCRIPTIONS[resultCode]);
     setTestStage("result");
-};
-
+  };
 
   const handleRestartTest = () => {
     setTestStage("intro");
@@ -76,7 +77,7 @@ const NfititTestFlow = () => {
   const renderContent = () => {
     switch (testStage) {
       case "intro":
-        return <Nfiti onStartTest={handleStartTest} />;
+        return <Start onStartTest={handleStartTest} />;
       case "nameInput":
         return <NameInput name={name} setName={setName} onSubmit={handleNameSubmit} />;
       case "process":

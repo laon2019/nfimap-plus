@@ -56,7 +56,7 @@ const NameInput: React.FC<NameInputProps> = ({ name, setName, onSubmit }) => {
       const ctx = canvas.getContext("2d");
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.font = '40px "UhBeeSe_hyun", serif';
+        ctx.font = '40px UhBeeSe_hyun';
         ctx.textAlign = "center";
         ctx.fillStyle = "#000";
         ctx.fillText(name, canvas.width / 2, canvas.height / 2 + 20);

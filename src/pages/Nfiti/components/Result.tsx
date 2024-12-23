@@ -9,8 +9,8 @@ import {
   Link,
 } from "@chakra-ui/react";
 import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
-import ResultText from "./components/ResultText";
-import ShareModal from "./components/ShareModal";
+import ResultText from "./ResultText";
+import ShareModal from "./ShareModal";
 import { FaInstagram } from "react-icons/fa";
 
 interface TestResultDetails {
@@ -108,7 +108,7 @@ const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
         ctx?.drawImage(img, 0, 0);
 
         if (ctx) {
-          ctx.font = 'Bold 64px "UhBeeSe_hyun", serif';
+          ctx.font = 'bold 64px UhBeeSe_hyun';
           ctx.fillStyle = "black";
           ctx.textAlign = "center";
           ctx.fillText(
