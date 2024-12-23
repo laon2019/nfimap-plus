@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
     >
       <Container 
         maxW="480px"
-        height="100%"
+        height="100dvh"
         p={0}
         backgroundColor="white"
         boxShadow="lg"
