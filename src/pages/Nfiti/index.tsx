@@ -44,7 +44,7 @@ const Nfiti = ({ onStartTest }: NfitiProps) => {
   }, []);
 
   return (
-    <Box position="relative" w="100%" h="calc(100vh - 68px)" overflow="hidden">
+    <Box position="relative" w="100%" h="calc(100svh - 68px)" overflow="hidden">
       <Flex h="150px" justifyContent="center" alignItems="center" p="20px 40px">
         {processedImages[0] && (
           <Image src={processedImages[0]} alt="제목" loading="eager" />
