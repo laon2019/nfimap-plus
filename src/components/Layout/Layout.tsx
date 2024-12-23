@@ -12,14 +12,14 @@ const Layout = ({ children }: LayoutProps) => {
   const bg = useRecoilValue(bgColorState);
   return (
     <Box 
-      height="100svh"
+      height="100%"
       display="flex" 
       justifyContent="center" 
       backgroundColor={bg}
     >
       <Container 
         maxW="480px"
-        height="100svh"
+        height="100%"
         p={0}
         backgroundColor="white"
         boxShadow="lg"
