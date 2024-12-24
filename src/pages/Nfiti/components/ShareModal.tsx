@@ -32,7 +32,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
   isOpen,
   onClose,
   canvasRef,
-  shareUrl = "https://nfimap-plus.co.kr/nfiti",
+  shareUrl,
   shareTitle = "NFITI 테스트 결과를 확인해보세요!",
   shareDescription = "",
 }) => {
@@ -69,7 +69,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
 
   const handleCopyLink = () => {
     navigator.clipboard
-      .writeText(shareUrl)
+      .writeText("https://nfimap-plus.co.kr/nfiti")
       .then(() => {
         toast({
           title: "링크 복사 완료",
@@ -171,7 +171,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
 
   const handleXShare = () => {
     const encodedTitle = encodeURIComponent(shareTitle + shareDescription);
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodeURIComponent(shareUrl)}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodeURIComponent("https://nfimap-plus.co.kr/nfiti")}`;
     window.open(twitterUrl, "_blank", "noopener,noreferrer");
   };
 

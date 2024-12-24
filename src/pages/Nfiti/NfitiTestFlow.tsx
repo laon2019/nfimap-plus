@@ -14,6 +14,7 @@ const NfititTestFlow = () => {
   const [answers, setAnswers] = useState<{ [key: number]: boolean }>({});
   const [testResult, setTestResult] = useState<TestResult | null>(null);
   const [name, setName] = useState("");
+  const [resultCode, setResultCode] = useState<keyof typeof RESULT_DESCRIPTIONS | null>(null);
   const setBgColor = useSetRecoilState(bgColorState);
 
   useEffect(() => {
@@ -37,10 +38,10 @@ const NfititTestFlow = () => {
   };
 
   useEffect(() => {
-  if (Object.keys(answers).length === QUESTIONS.length) {
-    calculateResult();
-  }
-}, [answers]);
+    if (Object.keys(answers).length === QUESTIONS.length) {
+      calculateResult();
+    }
+  }, [answers]);
 
   const calculateResult = () => {
     const group1 = [1, 4, 6]; // true면 E, false면 I
@@ -53,14 +54,16 @@ const NfititTestFlow = () => {
     const eOrI = countTrueInGroup(group1) > group1.length / 2 ? "E" : "I";
     const sOrN = countTrueInGroup(group2) > group2.length / 2 ? "S" : "N";
     const fOrT = countTrueInGroup(group3) > group3.length / 2 ? "T" : "F";
-    const resultCode = `${eOrI}${sOrN}${fOrT}` as keyof typeof RESULT_DESCRIPTIONS;
-    setTestResult(RESULT_DESCRIPTIONS[resultCode]);
+    const newResultCode = `${eOrI}${sOrN}${fOrT}` as keyof typeof RESULT_DESCRIPTIONS;
+    setResultCode(newResultCode);
+    setTestResult(RESULT_DESCRIPTIONS[newResultCode]);
     setTestStage("result");
   };
 
   const handleRestartTest = () => {
     setTestStage("intro");
     setTestResult(null);
+    setResultCode(null);
     setCurrentQuestionIndex(0);
     setAnswers({});
     setName("");
@@ -89,7 +92,7 @@ const NfititTestFlow = () => {
           />
         );
       case "result":
-        return <Result name={name} testResult={testResult} handleRestartTest={handleRestartTest} />;
+        return <Result name={name} resultCode={resultCode?.toString() || null} testResult={testResult} handleRestartTest={handleRestartTest} />;
     }
   };
 

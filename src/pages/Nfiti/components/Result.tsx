@@ -38,11 +38,12 @@ interface TestResult {
 
 interface ResultProps {
   name: string;
+  resultCode: string | null;
   testResult?: TestResult | null;
   handleRestartTest: () => void;
 }
 
-const Result = ({ name, testResult, handleRestartTest }: ResultProps) => {
+const Result = ({ name, resultCode,  testResult, handleRestartTest }: ResultProps) => {
   const [showLoading, setShowLoading] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -314,6 +315,7 @@ ${result.details.hashtags}`;
         canvasRef={canvasRef}
         shareTitle={name+"(이)는 "+testResult?.title || "테스트 결과"}
         shareDescription={formattedResult}
+        shareUrl={`nfiti/${resultCode}`}
       />
     </Box>
   );
