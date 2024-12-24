@@ -69,7 +69,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
 
   const handleCopyLink = () => {
     navigator.clipboard
-      .writeText("https://nfimap-plus.co.kr/nfiti")
+      .writeText(`https://nfimap-plus.co.kr/${shareUrl}`)
       .then(() => {
         toast({
           title: "링크 복사 완료",
