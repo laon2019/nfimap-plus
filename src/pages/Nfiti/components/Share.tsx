@@ -13,6 +13,8 @@ import ResultText from "./ResultText";
 import ShareModal from "./ShareModal";
 import { FaInstagram } from "react-icons/fa";
 import { RESULT_DESCRIPTIONS } from "../constants";
+import { useSetRecoilState } from "recoil";
+import { bgColorState } from "../../../Atom/bgColorState";
 
 interface TestResultDetails {
   reason: string; 
@@ -42,34 +44,41 @@ interface ResultProps {
 }
 
 const Share = ({ nfiti }: ResultProps) => {
-  const testResult = RESULT_DESCRIPTIONS[nfiti];
+    const testResult = RESULT_DESCRIPTIONS[nfiti];
+    
+    const setBgColor = useSetRecoilState(bgColorState);
 
-  const preloadImages = [
-    `/image/nfiti/loading/loading-gif.gif`,
-    `/image/Final_UI_save.svg`,
-    `/image/Final_UI_share.svg`,
-    `/image/nfiti/retry.png`,
-    `/image/nfiti/result/INF.png`,
-    `/image/nfiti/result/INT.png`,
-    `/image/nfiti/result/ISF.png`,
-    `/image/nfiti/result/IST.png`,
-    `/image/nfiti/result/ENF.png`,
-    `/image/nfiti/result/ENT.png`,
-    `/image/nfiti/result/EST.png`,
-    `/image/nfiti/result/ESF.png`,
-  ];
+    
+    const preloadImages = [
+        `/image/nfiti/loading/loading-gif.gif`,
+        `/image/Final_UI_save.svg`,
+        `/image/Final_UI_share.svg`,
+        `/image/nfiti/retry.png`,
+        `/image/nfiti/result/INF.png`,
+        `/image/nfiti/result/INT.png`,
+        `/image/nfiti/result/ISF.png`,
+        `/image/nfiti/result/IST.png`,
+        `/image/nfiti/result/ENF.png`,
+        `/image/nfiti/result/ENT.png`,
+        `/image/nfiti/result/EST.png`,
+        `/image/nfiti/result/ESF.png`,
+    ];
+    
+    const preloadAllImages = () => {
+        preloadImages.forEach((src) => {
+            const img = new (window as any).Image() as HTMLImageElement;
+            img.src = src;
+        });
+    };
+    
+    useEffect(() => {
+      setBgColor("purple.600");
+    }, []);
 
-  const preloadAllImages = () => {
-    preloadImages.forEach((src) => {
-      const img = new (window as any).Image() as HTMLImageElement;
-      img.src = src;
-    });
-  };
-
-  useLayoutEffect(() => {
-    preloadAllImages();
-  }, []);
-
+    useLayoutEffect(() => {
+        preloadAllImages();
+    }, []);
+    
   const handleRestartTest = () => {
     window.location.href = "https://nfimap-plus.co.kr/nfiti";
   };
