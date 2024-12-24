@@ -122,7 +122,7 @@ const Process = ({
             </Flex>
           )}
       <VStack spacing={6} align="stretch" height="100%">
-        <Box position="relative" h="30px">
+        <Box position="relative" h="30px" mt={4}>
           <Image
             src={`/image/nfiti/questions/02_QnA_PAGE_gauge_${svgIndex}.svg`}
             position="absolute"

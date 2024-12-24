@@ -92,7 +92,7 @@ const Result = ({ name, resultCode,  testResult, handleRestartTest }: ResultProp
 
         return () => clearTimeout(fadeOutTimer);
       }
-    }, 2600);
+    }, 3000);
 
     return () => clearTimeout(loadingTimer);
   }, []);
@@ -249,9 +249,10 @@ ${result.details.hashtags}`;
               </Flex>
 
               <ResultText testResult={testResult} />
-              <Box
+              <Flex
                 position="relative"
                 w="100%"
+                justifyContent="center"
                 onClick={handleRestartTest}
                 cursor="pointer"
                 _hover={{
@@ -264,10 +265,10 @@ ${result.details.hashtags}`;
                 <Image
                   src="/image/nfiti/retry.png"
                   alt="다시하기"
-                  w="100%"
+                  w="70%"
                   loading="eager"
                 />
-              </Box>
+              </Flex>
               <Flex
                 alignItems="center"
                 justifyContent="center"
